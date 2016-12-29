@@ -1,0 +1,111 @@
+// Tables  /////////////////////////////////////////////////////////
+// Variables ------------------------------------------------------
+@styletables       : false;
+
+@table_fontsize     : 0.875em;
+@table_padding_x    : (@elh / 4);
+@table_padding_y    : (@elh / 4);
+@table_headingweight: 300;
+@table_background   : @white;
+@table_hover        : darken(@table_background, 6);
+@table_borderwidth  : 1px;
+@table_bordercolor  : @decorcolor;
+
+// General --------------------------------------------------------
+table when (@styletables) {
+  .tabular();
+}
+
+.tabular {
+  font-size: @table_fontsize;
+
+  width: 100%;
+  white-space: nowrap;
+  margin-bottom: @elh;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: @table_background;
+
+  caption {
+    padding: 0 @table_padding_x;
+    margin-bottom: (@elh * 0.5);
+  }
+
+  th,
+  td {
+    border-top: @table_borderwidth solid @table_bordercolor;
+    padding: @table_padding_y @table_padding_x;
+    text-align: left;
+    line-height: inherit;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: @table_headingweight;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-top: none;
+  }
+
+  tbody tr th:first-child {
+    border-right: @table_borderwidth solid @table_bordercolor;
+  }
+
+  colgroup + thead tr:first-child th,
+  colgroup + thead tr:first-child td,
+  thead:first-child tr:first-child th,
+  thead:first-child tr:first-child td {
+    border-top : 0;
+  }
+
+  tbody + tbody {
+    border-top: (@table_borderwidth * 2) solid @table_bordercolor;
+  }
+
+  tbody tr td,
+  tbody tr th {
+    transition: background-color 0.15s;
+  }
+
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: @table_hover;
+  }
+
+  thead tr:last-child th {
+    border-bottom: (@table_borderwidth * 2) solid @table_bordercolor;
+  }
+
+  tfoot tr:first-child th {
+    border-top-width: (@table_borderwidth * 2);
+  }
+
+  // Fold -----------------------------------------------
+  @media @max-medium-screen {
+    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: block;
+
+    border-right: 1px solid @lightgrey;
+    padding-bottom: (@elh * 0.875);
+
+    caption {
+      text-align: left;
+    }
+  }
+}
+
+// Decoration ----------------------------------------------------
+.striped-table(@color) {
+  tbody tr:nth-child(odd) {
+    background-color: @color;
+  }
+
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: transparent;
+  }
+}

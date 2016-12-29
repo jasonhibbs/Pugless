@@ -1,0 +1,18 @@
+header(role="banner")
+  .layout
+    h1.site_title
+      a(href="index.html" title="The Homepage of" + title)= title
+
+    if nav_items
+      nav(role="navigation")
+        h1.menu_control(
+          aria-hidden="true"
+          aria-expanded="true"
+          aria-controls="primary_nav"
+          tabindex="0"
+        )
+          span.menu_text Menu
+        ul#primary_nav
+          each item in nav_items
+            li
+              a(href=item.href, title=item.title)= item.label

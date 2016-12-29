@@ -1,0 +1,49 @@
+// WordPress //////////////////////////////////////////////////////
+
+.size-full {
+  width: auto;
+  max-width: 100%;
+}
+
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+}
+
+.alignleft,
+.alignright {
+  max-width: 44%;
+}
+
+.alignleft {
+  float: left;
+  margin: 0 (@gw) (@elh) 0;
+
+  @media @tablet {
+    margin-left: -7.5%;
+  }
+}
+
+.alignright {
+  float: right;
+  margin: 0 0 (@elh) (@gw);
+
+  @media @tablet {
+    margin-right: -7.5%;
+  }
+}
+
+.size-thumbnail {
+  width: 24%;
+  max-width: 360px;
+}
+
+.size-medium {
+  width: 34%;
+  max-width: 680px;
+}
+
+.size-large {
+  width: 48%;
+  max-width: 960px;
+}

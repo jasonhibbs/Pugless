@@ -1,0 +1,513 @@
+// Controls ///////////////////////////////////////////////////////
+
+// Variables ------------------------------------------------------
+@control_line-height__small   : 1.875;
+@control_line-height__base    : 2;
+@control_radius       : 2px;
+
+@control_text         : @black;
+@control_background   : hsl(000, 000, 088%);
+@control_transition   : color 0.15s, background-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+@control_padding      : (5em/9);
+@control_border-width : 0;
+@control_border-color : @control_background;
+@control-thumb_color  : @white;
+@control_font-weight  : 400;
+
+@button_text          : @control_text;
+@button_background    : @control_background;
+@button_border-width  : @control_border-width;
+@button_border-color  : @control_border-color;
+@button_focus         : darken(@button_background, 12);
+@button_active        : darken(@button_focus, 8);
+@button_padding       : (7em/9);
+
+@input_text           : @control_text;
+@input_background     : @control_background;
+@input_border-width   : @control_border-width;
+@input_border-color   : @control_border-color;
+@input_focus          : @linkcolor;
+@input_invalid        : @errorcolor;
+@input_placeholder    : fadeout(@input_text, 66);
+@input_checkmark      : @input_text;
+@input_check_bg       : @input_background;
+@input_radio_size     : 38%;
+@input_padding        : @control_padding;
+
+// General --------------------------------------------------------
+form {
+  ul {
+    .delist();
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+button,
+select,
+input {
+  letter-spacing: 0.02em; // scope for smaller font sizes
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+// Inputs ---------------------------------------------------------
+input,
+textarea {
+  display: inline-block;
+  .control-size();
+  .control-style();
+  padding: 0 @control_padding;
+  text-overflow: ellipsis;
+
+  &:focus,
+  &:hover {
+    .control-focus-style();
+  }
+}
+
+textarea {
+  max-width: 100%;
+  padding-right: (@control_padding * 1.5);
+}
+
+::placeholder {
+  color: @input_placeholder;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  display: inline;
+}
+
+// Search -------------------------------------
+input[type="search"] {
+  appearance: none;
+}
+
+// Binaries -----------------------------------
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 0 0.5em;
+  vertical-align: top;
+
+  .gt-ie8 & {
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+    background: none;
+    border: none;
+    margin-top: unit((3/16), em);
+
+    &,
+    &:before {
+      width: (1em);
+      height: (1em);
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+    }
+
+    &:before {
+      .control-style();
+      background: @input_check_bg;
+    }
+
+    &:after {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+
+    &:checked:after {
+      opacity: 1;
+    }
+
+    &:focus,
+    &:hover {
+      border: none;
+      box-shadow: none;
+
+      &:before {
+        outline: none;
+        box-shadow: 0 0 0 1px @input_focus;
+      }
+    }
+  }
+}
+
+.gt-ie8 input[type="checkbox"] {
+  &:after {
+    border: unit((2/16), em) solid @input_checkmark;
+    border-top: none;
+    border-right: none;
+
+    left:   13%;
+    top:    24%;
+    height: 38%;
+    width:  73%;
+    transform: rotate(-45deg);
+  }
+}
+
+.gt-ie8 input[type="radio"] {
+  &:before,
+  &:after {
+    border-radius: 100%;
+  }
+
+  &:after {
+    background: @input_checkmark;
+    height: @input_radio_size;
+    width:  @input_radio_size;
+    top: 50%; left: 50%;
+    transform: translate3d(-50%,-50%,0);
+  }
+}
+
+// Range --------------------------------------
+input[type="range"] {
+  appearance: none;
+  padding: @control_border-width;
+  .range-size(@control_line-height__small);
+
+  &::-webkit-slider-thumb {
+    .cc_input-range__thumb();
+  }
+  &::-moz-range-thumb {
+    .cc_input-range__thumb();
+  }
+  &::-ms-thumb {
+    .cc_input-range__thumb();
+  }
+  &::-moz-range-track {
+    .cc_input-range__track();
+  }
+  &::-ms-track {
+    .cc_input-range__track();
+  }
+  &::-ms-fill-lower,
+  &::-ms-fill-upper {
+    .cc_input-range__track();
+  }
+  &::-ms-tooltip {
+    display: none;
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: none;
+
+    &::-webkit-slider-thumb {
+      .cc_input-range__thumb__hover();
+    }
+    &::-moz-range-thumb {
+      .cc_input-range__thumb__hover();
+    }
+    &::-ms-thumb {
+      .cc_input-range__thumb__hover();
+    }
+  }
+
+  &:active {
+    &::-webkit-slider-thumb {
+      .cc_input-range__thumb__active();
+    }
+    &::-moz-range-thumb {
+      .cc_input-range__thumb__active();
+    }
+    &::-ms-thumb {
+      .cc_input-range__thumb__active();
+    }
+  }
+}
+
+.cc_input-range__track() {
+  outline: none;
+  border: inherit;
+  color: transparent;
+  background: transparent;
+}
+
+.cc_input-range__thumb() {
+  display: block;
+  appearance: none;
+  border: none;
+  border-radius: (@control_radius * 0.5);
+  background: @control-thumb_color;
+  cursor: pointer;
+  cursor: grab;
+  transition: @control_transition;
+}
+
+.cc_input-range__thumb__hover() {
+  box-shadow: 0 0 0 1px @input_focus;
+}
+.cc_input-range__thumb__active() {
+  cursor: grabbing;
+}
+
+// Selects --------------------------------------------------------
+select {
+  display: inline-block;
+  .control-size();
+  .control-style();
+  min-height: unit(@control_line-height__small, em);
+  padding: 0 @control_padding;
+  appearance: none;
+  cursor: pointer;
+
+  &:hover {
+    color: @input_text;
+  }
+
+  &:focus,
+  &:hover {
+    .control-focus-style();
+  }
+
+  .select_arrow__dark();
+
+  .gt-ie8 & {
+    padding: 0 (@control_padding * 3) 0 @control_padding;
+    background-repeat: no-repeat;
+    background-position: right (@control_padding) center;
+    background-size: (@control_padding * 1.25) auto;
+  }
+
+  [multiple],
+  .gt-ie8 &[multiple] {
+    height: auto;
+    padding: 0;
+    background-image: none;
+
+    option {
+      padding: 0.154em @control_padding;
+      padding-right: (@control_padding * 3);
+    }
+
+    optgroup {
+      padding-top: 0.154em;
+      text-indent: @control_padding;
+      font-weight: inherit;
+      line-height: inherit;
+      color: fadeout(@control_text, (100/3));
+    }
+
+    optgroup option {
+      padding-left: 0;
+      color: @control_text;
+    }
+  }
+}
+
+.select_arrow__dark {
+  .gt-ie8 & {
+    background-image: @icon_arrow-down-dark;
+  }
+}
+
+.select_arrow__light {
+  .gt-ie8 & {
+    background-image: @icon_arrow-down-light;
+  }
+}
+
+// Buttons --------------------------------------------------------
+button,
+input[type="button"] {
+  border: none;
+  appearance: none;
+}
+
+button,
+.button,
+[role="button"],
+input[type="button"] {
+  display: inline-block;
+  box-shadow: none;
+
+  .control-size();
+  .button-style();
+}
+
+.button() {
+  display: inline-block;
+  letter-spacing: 0.02em;
+  .control-size();
+  .button-style();
+}
+
+// Modifiers ------------------------------------------------------
+.disabled,
+[disabled] {
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+  opacity: (2/3);
+}
+
+.invalid {
+  box-shadow: 0 0 0 1px @input_invalid;
+}
+
+// Mixins ---------------------------------------------------------
+
+// Styling ------------------------------------
+.button-style() {
+  background: @control_background;
+  border: @button_border-width solid @button_border-color;
+  border-radius: @control_radius;
+  padding: 0 @button_padding;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: @control_transition;
+  font-weight: @control_font-weight;
+
+  &,
+  &:visited,
+  &:hover {
+    color: @control_text;
+  }
+
+  &:focus,
+  &:hover {
+    outline: 0;
+    background-color: @button_focus;
+  }
+
+  &:active {
+    background-color: @button_active;
+  }
+}
+
+.control-style() {
+  color: @input_text;
+  background: @input_background;
+  border: @input_border-width solid @input_border-color;
+  border-radius: @control_radius;
+  vertical-align: middle;
+  transition: @control_transition;
+  font-weight: @control_font-weight;
+}
+
+.control-focus-style() {
+  outline: none;
+  box-shadow: 0 0 0 1px @input_focus;
+}
+
+// Sizing -------------------------------------
+.control-size(@font-size: @fontsize_base, @line-height: @control_line-height__small) {
+  font-size: unit((@font-size / @fontsize_base), em);
+  line-height: @line-height;
+}
+
+.control-small,
+.input-small,
+.button-small   { .control-size(13, (24/12)); }
+
+.control-base,
+.input-base,
+.button-base    { .control-size(14, (30/14)); }
+
+.control-large,
+.input-large,
+.button-large   { .control-size(16, (36/16)); }
+
+.control-xlarge,
+.input-xlarge,
+.button-xlarge  { .control-size(18, (39/18)); }
+
+.control-xxlarge,
+.input-xxlarge,
+.button-xxlarge { .control-size(21, (45/21)); }
+
+.range-size(@size: @control_line-height__small) {
+  .size(@size) {
+    width: (0.875em * @size);
+    height: (0.875em * @size);
+  }
+  &::-webkit-slider-thumb {
+    .size(@size);
+  }
+  &::-moz-range-thumb {
+    .size(@size);
+  }
+  &::-ms-thumb {
+    .size(@size);
+  }
+}
+
+// Colouring ----------------------------------
+.control-colour(@text-color: @input_text, @background-color: @input_background, @focus-color: @input_focus) {
+  color: @text-color;
+  background-color: @background-color;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 0 1px @focus-color;
+  }
+}
+
+.button-color(@text-color: @button_text, @background-color: @button_background) {
+  background-color: @background-color;
+
+  &,
+  &:visited,
+  &:hover {
+    color: @text-color;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: darken(@background-color, 12);
+  }
+
+  &:active {
+    background-color: darken(@background-color, 20);
+  }
+}
+
+.button-primary {
+  .button-color(@white, @basecolor);
+}
+
+// Resets -------------------------------------
+.button-reset() {
+  padding: 0;
+
+  &,
+  &:focus,
+  &:hover {
+    color: initial;
+    background: initial;
+  }
+}
+
+// Fixes ----------------------------------------------------------
+// FF(S) --------------------------------------
+@-moz-document url-prefix() {
+  textarea {
+    padding-right: 0 !important;
+  }
+
+  select {
+    text-indent: 1px;
+    text-overflow: '';
+  }
+}
+
+// Sprites --------------------------------------------------------
+@icon_arrow-down-dark: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm93LWRvd24tYmxhY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDY0IDQwIj48ZyBvcGFjaXR5PSIwLjM1Ij48cGF0aCBkPSJNNjMuMzYsOC40N0wzMy40NywzOC4zNmEyLDIsMCwwLDEtMi45NSwwTDAuNjQsOC40N0EyLjIxLDIuMjEsMCwwLDEsMCw3LDIuMjEsMi4yMSwwLDAsMSwuNjQsNS41M0wzLjg1LDIuMzJhMi4wOSwyLjA5LDAsMCwxLDEuNDctLjY0LDIuMjEsMi4yMSwwLDAsMSwxLjQ3LjY0TDMyLDI3LjUyLDU3LjIsMi4zMmEyLDIsMCwwLDEsMi45NSwwbDMuMjEsMy4yMUEyLjIxLDIuMjEsMCwwLDEsNjQsNywyLjIxLDIuMjEsMCwwLDEsNjMuMzYsOC40N1oiIGZpbGw9IiMwMDAiLz48L2c+PC9zdmc+Cg==);
+@icon_arrow-down-light: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm93LWRvd24td2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDY0IDQwIj48ZyBvcGFjaXR5PSIwLjM1Ij48cGF0aCBkPSJNNjMuMzYsOC40N0wzMy40NywzOC4zNmEyLDIsMCwwLDEtMi45NSwwTDAuNjQsOC40N0EyLjIxLDIuMjEsMCwwLDEsMCw3LDIuMjEsMi4yMSwwLDAsMSwuNjQsNS41M0wzLjg1LDIuMzJhMi4wOSwyLjA5LDAsMCwxLDEuNDctLjY0LDIuMjEsMi4yMSwwLDAsMSwxLjQ3LjY0TDMyLDI3LjUyLDU3LjIsMi4zMmEyLDIsMCwwLDEsMi45NSwwbDMuMjEsMy4yMUEyLjIxLDIuMjEsMCwwLDEsNjQsNywyLjIxLDIuMjEsMCwwLDEsNjMuMzYsOC40N1oiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+Cg==);

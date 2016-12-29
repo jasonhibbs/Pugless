@@ -1,0 +1,190 @@
+// Typography /////////////////////////////////////////////////////
+
+// Variables ------------------------------------------------------
+@fontspath : '../fonts';
+
+@fontfamily_base    : -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@fontfamily_body    : @fontfamily_base;
+@fontfamily_heading : @fontfamily_body;
+@fontfamily_alt     : @fontfamily_base;
+@fontfamily_mono    : "Panic Sans", Consolas, "Liberation Mono", Menlo, "Lucida Console", Courier, monospace;
+@fontfamily_icon    : FontAwesome;
+
+@fontsize_UA        : 16;
+@fontsize_base      : 16;
+@fontsize_medium    : 18;
+@fontsize_large     : 20;
+@fontsize_xlarge    : 21;
+
+@_fontsize_base   : percentage(((@fontsize_base   / @fontsize_UA) * (10 / @fontsize_UA)));
+@_fontsize_medium : percentage(((@fontsize_medium / @fontsize_UA) * (10 / @fontsize_UA)));
+@_fontsize_large  : percentage(((@fontsize_large  / @fontsize_UA) * (10 / @fontsize_UA)));
+@_fontsize_xlarge : percentage(((@fontsize_xlarge / @fontsize_UA) * (10 / @fontsize_UA)));
+
+@lineheight_base    : 24;
+@lineheight_body    : (@lineheight_base / @fontsize_base);
+@lineheight_heading : (52/40);
+@lineheight_em      : unit(@lineheight_body, em);
+@elh                : @lineheight_em;
+
+@fontweight_base    : 400;
+@fontweight_bold    : (@fontweight_base + 100);
+@fontweight_heading : (@fontweight_base + 100);
+
+@li_padding         : (40em/@fontsize_base); // UA default is 40px
+
+// Mixins ---------------------------------------------------------
+.font-size(@pt_size: @fontsize_base) {
+  font-size: unit(@pt_size, px);
+  font-size: unit((@pt_size / 10), rem);
+}
+
+.typeset(@font-size: @fontsize_base, @line-height: @lineheight_base) {
+  font-size: unit((@font-size / @fontsize_base), em);  // e.g. 18 / 16 = 1.125em
+  line-height: (@line-height / @font-size); // e.g. 27 / 18 = 1.5
+}
+
+.font-face( @family-name, @path, @font-weight: normal, @font-style: normal) {
+  @font-face {
+    font-family: @family-name;
+    src: url('@{path}.eot');
+    src: url('@{path}.eot?#iefix') format('embedded-opentype'),
+         url('@{path}.woff2') format('woff2'),
+         url('@{path}.woff') format('woff'),
+         url('@{path}.ttf') format('truetype'),
+         url('@{path}.svg#@{family-name}') format('svg');
+    font-weight: @font-weight;
+    font-style:  @font-style;
+  }
+}
+
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Fonts ----------------------------------------------------------
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500');
+// .font-face('CC Rubik Web', '@{fontspath}/cc_rubik/cc_rubik_regular',     400);
+// .font-face('CC Rubik Web', '@{fontspath}/cc_rubik/cc_rubik_italic',      400, italic);
+// .font-face('CC Rubik Web', '@{fontspath}/cc_rubik/cc_rubik_light',       300);
+// .font-face('CC Rubik Web', '@{fontspath}/cc_rubik/cc_rubik_lightitalic', 300, italic);
+// .font-face('CC Rubik Web', '@{fontspath}/cc_rubik/cc_rubik_medium',      500);
+
+// Definitions ----------------------------------------------------
+
+h1, .h1 {
+  .heading-size(36);
+}
+h2, .h2 {
+  .heading-size(32);
+}
+h3, .h3 {
+  .heading-size(27);
+}
+h4, .h4 {
+  .heading-size(21);
+}
+h5, .h5 {
+  .heading-size(18);
+}
+h6, .h6 {
+  .heading-size(14);
+  text-transform: uppercase;
+  letter-spacing: (3em/100);
+}
+
+.heading-size(@px_size, @px_margin: @lineheight_base) {
+  font-size: unit((@px_size / @fontsize_UA), em);
+  .margin-y( unit((@px_margin / @px_size), em) );
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: @headingcolor;
+  font-family: @fontfamily_heading;
+  font-weight: @fontweight_heading;
+  line-height: @lineheight_heading;
+  text-rendering: optimizelegibility;
+
+  .lighter &,
+  &.lighter {
+    font-weight: @fontweight_heading - 100;
+  }
+
+  .heavier &,
+  &.heavier {
+    font-weight: @fontweight_heading + 100;
+  }
+}
+
+p,
+ol,
+ul,
+dl,
+address,
+blockquote {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0 auto @elh;
+
+  .lighter &,
+  &.lighter {
+    font-weight: @fontweight_base - 100;
+  }
+
+  .heavier &,
+  &.heavier {
+    font-weight: @fontweight_base + 100;
+  }
+}
+
+abbr,
+dfn {
+  cursor: help;
+}
+
+tt,
+code,
+kbd,
+pre,
+samp {
+  font-family: @fontfamily_mono;
+  display: inline-block;
+  background: fadeout(@basecolor, 94);
+  padding: 0 0.25em;
+}
+
+b, strong {
+  font-weight: @fontweight_bold;
+}
+
+small {
+  font-size: 0.875em;
+  font-weight: 300;
+}
+
+ul,
+ol {
+  margin: 0 auto @elh;
+}
+
+li a {
+  display: block;
+}
+
+li ul,
+li ol {
+  margin: 0 auto 0;
+}
+
+blockquote {
+  border-left: 0.25em solid @decorcolor;
+  margin-left: 0;
+  padding-left: 1.25em;
+}
