@@ -36,12 +36,8 @@ function debounce(func, wait, immediate, signal, signal_delay) {
 // Responsive Video ///////////////////////////////////////////////
 // Keep relative height on video iframes
 $(function() {
-
-  var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com'], object, embed"),
-  $fluidEl = $('figure');
-
+  var $allVideos = $("iframe[src*='//player.vimeo.com'], iframe[src*='//www.youtube.com'], object, embed");
   $allVideos.each(function() {
-
     $(this)
       .attr('data-aspectRatio', this.height / this.width)
       .removeAttr('height')
@@ -49,27 +45,21 @@ $(function() {
   });
 
   $(window).resize(function() {
-
-    var newWidth = $fluidEl.width();
     $allVideos.each(function() {
-
-      var $el = $(this);
-      $el.width(newWidth)
-         .height(newWidth * $el.attr('data-aspectRatio'));
+      var $el = $(this),
+          new_width = $el.parent().width();
+      $el.width( new_width )
+         .height(new_width * $el.attr('data-aspectRatio'));
     });
-
   }).resize();
-
 });
 
-////////////////////////////////////////////////////////////////
-/* jquery.keyboard-focus.js (defines classes for when focus was obtained via the keyboard)
- * @author Andrew Ramsden
- * @see http://irama.org/web/dhtml/key-focus/
- * @license Common Public License Version 1.0 <http://www.opensource.org/licenses/cpl1.0.txt>
- * @requires jQuery (tested with version 1.3.1) <http://jquery.com/>
- */
-
+// Keyboard Focus /////////////////////////////////////////////////
+// jquery.keyboard-focus.js (defines classes for when focus was obtained via the keyboard)
+// @author Andrew Ramsden
+// @see http://irama.org/web/dhtml/key-focus/
+// @license Common Public License Version 1.0 <http://www.opensource.org/licenses/cpl1.0.txt>
+// @requires jQuery (tested with version 1.3.1) <http://jquery.com/>
 jQuery.keyFocus = {};
 jQuery.keyFocus.conf = {
   keyFocusClass   : 'focus_keys',
