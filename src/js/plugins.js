@@ -126,14 +126,14 @@ function initARIA() {
 
 // Buttons should be activated with Space bar if also focussed
 function initARIAButtons() {
-  $(document).on('keydown', 'a[role="button"]', function(event){
+  $(document).on('keydown', '[role="button"]', function(event){
     var $button = $(this);
 
     if (
       event.keyCode == 32 &&
       $button.not(':disabled').not('.disabled').is(':focus')
     ) {
-      $(this).click();
+      $button.click();
     }
   });
 }

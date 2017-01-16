@@ -1,7 +1,15 @@
 // Assistive //////////////////////////////////////////////////////
 .focus_keys {
   outline: none;
-  box-shadow: inset 0 0 0 2px mix(@yellow, @orange, 66);
+  box-shadow: inset 0 0 0 2px @keyfocuscolor;
+
+  input&,
+  select&,
+  textarea&,
+  button&,
+  [role=button]& {
+    box-shadow: 0 0 0 2px @keyfocuscolor;
+  }
 }
 
 [aria-hidden] {
@@ -17,12 +25,9 @@
   }
 }
 
-[aria-pressed="false"] .aria_pressed__true,
-[aria-pressed="true"] .aria_pressed__false {
-  display: none;
-}
-
-[aria-expanded="false"] .aria_expanded__true,
-[aria-expanded="true"] .aria_expanded__false {
+[aria-pressed =true]  .aria_pressed__false,
+[aria-expanded=true]  .aria_expanded__false,
+[aria-pressed =false] .aria_pressed__true,
+[aria-expanded=false] .aria_expanded__true {
   display: none;
 }

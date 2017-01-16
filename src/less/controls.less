@@ -76,7 +76,10 @@ textarea {
 
 textarea {
   max-width: 100%;
+  padding-top: 0.25em;
   padding-right: (@control_padding * 1.5);
+  line-height: 1.5;
+  min-height: 3.5em;
 }
 
 ::placeholder {
@@ -377,6 +380,7 @@ input[type="button"] {
 
   &,
   &:visited,
+  &:focus,
   &:hover {
     color: @control_text;
   }
@@ -465,6 +469,7 @@ input[type="button"] {
 
   &,
   &:visited,
+  &:focus,
   &:hover {
     color: @text-color;
   }

@@ -47,3 +47,24 @@
   width: 48%;
   max-width: 960px;
 }
+
+.wp-caption {
+
+  &[style] {
+    width: auto !important;
+  }
+
+  .wp-caption-text {
+    &, a {
+      color: fadeout(@textcolor, 66);
+    }
+
+    a:hover,
+    a:focus {
+      color: @linkcolor;
+    }
+
+    font-size: 0.75em;
+    font-weight: (@fontweight_base - 100);
+  }
+}
