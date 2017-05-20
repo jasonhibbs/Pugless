@@ -1,0 +1,90 @@
+form
+  p
+    label
+      | Text
+      br
+      input
+
+  p
+    label
+      | Disabled
+      br
+      input(disabled)
+
+  p
+    label
+      | Textarea
+      br
+      textarea
+
+  p
+    label
+      | Select
+      br
+      select
+        optgroup(label="Something")
+          option This
+          option That
+        optgroup(label="Other")
+          option Now
+          option Then
+
+  p
+    label
+      input(type="checkbox")
+      | Checkbox
+
+
+  fieldset
+    legend Radio
+    label
+      input(type="radio" name="radio" value="1")
+      | This 
+    label
+      input(type="radio" name="radio" value="2")
+      | That 
+    label
+      input(type="radio" name="radio" value="3")
+      | Other 
+
+  br
+
+  p
+    label
+      | Number
+      br
+      input(type="number")
+
+  p
+    label
+      | Range
+      br
+      input(type="range")
+
+  p
+    label
+      | File
+      br
+      input(type="file")
+
+  p
+    label
+      | Colour
+      br
+      input(type="color")
+
+  p
+    label
+      | Select Multiple
+      br
+      select(multiple)
+        optgroup(label="Group")
+          option This
+          option That
+        optgroup(label="Group")
+          option Now
+          option Then
+
+  p
+    button(type="button") Done
+    button(type="submit") Submit

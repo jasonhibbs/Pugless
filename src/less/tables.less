@@ -3,8 +3,8 @@
 @styletables       : false;
 
 @table_fontsize     : 0.875em;
-@table_padding_x    : (@elh / 4);
-@table_padding_y    : (@elh / 4);
+@table_padding-x    : (@elh / 4);
+@table_padding-y    : (@elh / 4);
 @table_headingweight: 300;
 @table_background   : @white;
 @table_hover        : darken(@table_background, 6);
@@ -16,25 +16,31 @@ table when (@styletables) {
   .tabular();
 }
 
-.tabular {
+table {
   font-size: @table_fontsize;
-
   width: 100%;
   white-space: nowrap;
-  margin-bottom: @elh;
   border-collapse: collapse;
   border-spacing: 0;
+
+  th {
+    font-weight: @table_headingweight;
+  }
+}
+
+.tabular {
+  margin-bottom: @elh;
   background-color: @table_background;
 
   caption {
-    padding: 0 @table_padding_x;
+    padding: 0 @table_padding-x;
     margin-bottom: (@elh * 0.5);
   }
 
   th,
   td {
     border-top: @table_borderwidth solid @table_bordercolor;
-    padding: @table_padding_y @table_padding_x;
+    padding: @table_padding-y @table_padding-x;
     text-align: left;
     line-height: inherit;
     vertical-align: top;
@@ -88,6 +94,7 @@ table when (@styletables) {
     overflow-y: hidden;
     overflow-x: auto;
     display: block;
+    -webkit-overflow-scrolling: touch;
 
     border-right: 1px solid @lightgrey;
     padding-bottom: (@elh * 0.875);
@@ -99,7 +106,7 @@ table when (@styletables) {
 }
 
 // Decoration ----------------------------------------------------
-.striped-table(@color) {
+.table-stripe(@color) {
   tbody tr:nth-child(odd) {
     background-color: @color;
   }

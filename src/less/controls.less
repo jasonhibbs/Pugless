@@ -1,8 +1,7 @@
 // Controls ///////////////////////////////////////////////////////
 
 // Variables ------------------------------------------------------
-@control_line-height__small   : 1.875;
-@control_line-height__base    : 2;
+@control_line-height  : 1.875;
 @control_radius       : 2px;
 
 @control_text         : @black;
@@ -31,7 +30,7 @@
 @input_placeholder    : fadeout(@input_text, 66);
 @input_checkmark      : @input_text;
 @input_check_bg       : @input_background;
-@input_radio_size     : 38%;
+@input_radio_padding  : 5px;
 @input_padding        : @control_padding;
 
 // General --------------------------------------------------------
@@ -72,6 +71,18 @@ textarea {
   &:hover {
     .control-focus-style();
   }
+
+  &[readonly] {
+    background: transparent;
+    box-shadow: 0 0 0 1px fadeout(@input_focus, 100),
+          inset 0 0 0 1px @input_background;
+
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 0 1px @input_focus,
+            inset 0 0 0 1px transparent;
+    }
+  }
 }
 
 textarea {
@@ -91,65 +102,73 @@ textarea {
 }
 
 // Search -------------------------------------
-input[type="search"] {
+input[type=search] {
   appearance: none;
 }
 
 // Binaries -----------------------------------
-input[type="checkbox"],
-input[type="radio"] {
+input[type=checkbox],
+input[type=radio] {
   margin: 0 0.5em;
   vertical-align: top;
 
-  .gt-ie8 & {
-    position: relative;
-    cursor: pointer;
-    appearance: none;
-    background: none;
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+  background: none;
+  border: none;
+  margin-top: unit((3/16), em);
+
+  &,
+  &:before {
+    width: (1em);
+    height: (1em);
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+  }
+
+  &:before {
+    .control-style();
+    background: @input_check_bg;
+  }
+
+  &:after {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+
+  &:checked:after {
+    opacity: 1;
+  }
+
+  &:focus,
+  &:hover {
     border: none;
-    margin-top: unit((3/16), em);
-
-    &,
-    &:before {
-      width: (1em);
-      height: (1em);
-    }
-
-    &:before,
-    &:after {
-      content: '';
-      display: block;
-    }
+    box-shadow: none;
 
     &:before {
-      .control-style();
-      background: @input_check_bg;
+      outline: none;
+      box-shadow: 0 0 0 1px @input_focus;
     }
+  }
 
-    &:after {
-      position: absolute;
-      opacity: 0;
-      transition: opacity 0.1s;
-    }
-
-    &:checked:after {
-      opacity: 1;
-    }
-
-    &:focus,
-    &:hover {
-      border: none;
-      box-shadow: none;
-
-      &:before {
-        outline: none;
-        box-shadow: 0 0 0 1px @input_focus;
-      }
-    }
+  &:first-child {
+    margin-left: 0;
   }
 }
 
-.gt-ie8 input[type="checkbox"] {
+input[type=checkbox] {
+  -moz-appearance: checkbox;
+
+  &:indeterminate:after {
+    opacity: 1;
+  }
+
   &:after {
     border: unit((2/16), em) solid @input_checkmark;
     border-top: none;
@@ -163,7 +182,9 @@ input[type="radio"] {
   }
 }
 
-.gt-ie8 input[type="radio"] {
+input[type=radio] {
+  -moz-appearance: radio;
+
   &:before,
   &:after {
     border-radius: 100%;
@@ -171,38 +192,37 @@ input[type="radio"] {
 
   &:after {
     background: @input_checkmark;
-    height: @input_radio_size;
-    width:  @input_radio_size;
-    top: 50%; left: 50%;
-    transform: translate3d(-50%,-50%,0);
+    top:    @input_radio_padding;
+    right:  @input_radio_padding;
+    bottom: @input_radio_padding;
+    left:   @input_radio_padding;
   }
 }
 
 // Range --------------------------------------
-input[type="range"] {
+input[type=range] {
   appearance: none;
-  padding: @control_border-width;
-  .range-size(@control_line-height__small);
+  padding: 2px;
+  .range-size();
 
-  &::-webkit-slider-thumb {
-    .cc_input-range__thumb();
-  }
-  &::-moz-range-thumb {
-    .cc_input-range__thumb();
-  }
-  &::-ms-thumb {
-    .cc_input-range__thumb();
-  }
-  &::-moz-range-track {
-    .cc_input-range__track();
-  }
-  &::-ms-track {
-    .cc_input-range__track();
-  }
-  &::-ms-fill-lower,
-  &::-ms-fill-upper {
-    .cc_input-range__track();
-  }
+  .input-range-thumb({
+    display: block;
+    appearance: none;
+    border: none;
+    border-radius: (@control_radius * 0.5);
+    background: @control-thumb_color;
+    cursor: pointer;
+    cursor: grab;
+    transition: @control_transition;
+  });
+
+  .input-range-track({
+    outline: none;
+    border: inherit;
+    color: transparent;
+    background: transparent;
+  });
+
   &::-ms-tooltip {
     display: none;
   }
@@ -211,53 +231,29 @@ input[type="range"] {
   &:hover {
     box-shadow: none;
 
-    &::-webkit-slider-thumb {
-      .cc_input-range__thumb__hover();
-    }
-    &::-moz-range-thumb {
-      .cc_input-range__thumb__hover();
-    }
-    &::-ms-thumb {
-      .cc_input-range__thumb__hover();
-    }
+    .input-range-thumb({
+      box-shadow: 0 0 0 1px @input_focus;
+    });
   }
 
   &:active {
-    &::-webkit-slider-thumb {
-      .cc_input-range__thumb__active();
-    }
-    &::-moz-range-thumb {
-      .cc_input-range__thumb__active();
-    }
-    &::-ms-thumb {
-      .cc_input-range__thumb__active();
-    }
+    .input-range-thumb({
+      cursor: grabbing;
+    });
   }
 }
 
-.cc_input-range__track() {
-  outline: none;
-  border: inherit;
-  color: transparent;
-  background: transparent;
+.input-range-thumb(@rules) {
+  &::-webkit-slider-thumb { @rules(); }
+  &::-moz-range-thumb     { @rules(); }
+  &::-ms-thumb            { @rules(); }
 }
 
-.cc_input-range__thumb() {
-  display: block;
-  appearance: none;
-  border: none;
-  border-radius: (@control_radius * 0.5);
-  background: @control-thumb_color;
-  cursor: pointer;
-  cursor: grab;
-  transition: @control_transition;
-}
-
-.cc_input-range__thumb__hover() {
-  box-shadow: 0 0 0 1px @input_focus;
-}
-.cc_input-range__thumb__active() {
-  cursor: grabbing;
+.input-range-track(@rules) {
+  &::-moz-range-track { @rules(); }
+  &::-ms-track        { @rules(); }
+  &::-ms-fill-lower   { @rules(); }
+  &::-ms-fill-upper   { @rules(); }
 }
 
 // Selects --------------------------------------------------------
@@ -265,10 +261,15 @@ select {
   display: inline-block;
   .control-size();
   .control-style();
-  min-height: unit(@control_line-height__small, em);
   padding: 0 @control_padding;
+  padding-right: (@control_padding * 3);
   appearance: none;
   cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-position: right (@control_padding) center;
+  background-size: (@control_padding * 1.25) auto;
+  .select_arrow__dark();
 
   &:hover {
     color: @input_text;
@@ -279,17 +280,7 @@ select {
     .control-focus-style();
   }
 
-  .select_arrow__dark();
-
-  .gt-ie8 & {
-    padding: 0 (@control_padding * 3) 0 @control_padding;
-    background-repeat: no-repeat;
-    background-position: right (@control_padding) center;
-    background-size: (@control_padding * 1.25) auto;
-  }
-
-  [multiple],
-  .gt-ie8 &[multiple] {
+  &[multiple] {
     height: auto;
     padding: 0;
     background-image: none;
@@ -308,27 +299,33 @@ select {
     }
 
     optgroup option {
-      padding-left: 0;
-      color: @control_text;
+      // padding-left: 0;
+      // color: @control_text;
     }
   }
 }
 
 .select_arrow__dark {
-  .gt-ie8 & {
-    background-image: @icon_arrow-down-dark;
-  }
+  background-image: @icon_arrow-down-dark;
 }
 
 .select_arrow__light {
-  .gt-ie8 & {
-    background-image: @icon_arrow-down-light;
+  background-image: @icon_arrow-down-light;
+}
+
+@-moz-document url-prefix() {
+  select {
+    .padding-y(4.5em/16);
+
+    &:-moz-focusring {
+      outline: none;
+    }
   }
 }
 
 // Buttons --------------------------------------------------------
 button,
-input[type="button"] {
+input[type=button] {
   border: none;
   appearance: none;
 }
@@ -336,7 +333,7 @@ input[type="button"] {
 button,
 .button,
 [role="button"],
-input[type="button"] {
+input[type=button] {
   display: inline-block;
   box-shadow: none;
 
@@ -352,15 +349,20 @@ input[type="button"] {
 }
 
 // Modifiers ------------------------------------------------------
-.disabled,
+._disabled,
 [disabled] {
   cursor: default;
   user-select: none;
   pointer-events: none;
   opacity: (2/3);
+
+  &:focus,
+  &:hover {
+    box-shadow: none;
+  }
 }
 
-.invalid {
+._invalid {
   box-shadow: 0 0 0 1px @input_invalid;
 }
 
@@ -412,9 +414,25 @@ input[type="button"] {
 }
 
 // Sizing -------------------------------------
-.control-size(@font-size: @fontsize_base, @line-height: @control_line-height__small) {
+.control-size(@font-size: @fontsize_base, @line-height: @control_line-height) {
   font-size: unit((@font-size / @fontsize_base), em);
   line-height: @line-height;
+}
+
+.range-size(@lineheight: @control_line-height) {
+  .size(@lineheight) {
+    width:  calc(~"@{lineheight}em" - 4px);
+    height: calc(~"@{lineheight}em" - 4px);
+  }
+  &::-webkit-slider-thumb {
+    .size(@lineheight);
+  }
+  &::-moz-range-thumb {
+    .size(@lineheight);
+  }
+  &::-ms-thumb {
+    .size(@lineheight);
+  }
 }
 
 .control-small,
@@ -436,22 +454,6 @@ input[type="button"] {
 .control-xxlarge,
 .input-xxlarge,
 .button-xxlarge { .control-size(21, (45/21)); }
-
-.range-size(@size: @control_line-height__small) {
-  .size(@size) {
-    width: (0.875em * @size);
-    height: (0.875em * @size);
-  }
-  &::-webkit-slider-thumb {
-    .size(@size);
-  }
-  &::-moz-range-thumb {
-    .size(@size);
-  }
-  &::-ms-thumb {
-    .size(@size);
-  }
-}
 
 // Colouring ----------------------------------
 .control-colour(@text-color: @input_text, @background-color: @input_background, @focus-color: @input_focus) {
@@ -491,6 +493,7 @@ input[type="button"] {
 // Resets -------------------------------------
 .button-reset() {
   padding: 0;
+  line-height: inherit;
 
   &,
   &:focus,

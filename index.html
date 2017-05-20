@@ -1,5 +1,4 @@
-<!DOCTYPE html><!--[if lt IE 9]><html class="no-js lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js gt-ie8" lang="en"><!--<![endif]-->
+<!DOCTYPE html><html class="no-js" lang="en">
 <meta charset="utf-8">
 <title>Pugless</title>
 <meta name="description" content="Just another upstart">
@@ -13,7 +12,6 @@
 <link rel="apple-touch-icon-precomposed" href="src/img/meta/apple-touch-icon-precomposed.png">
 <meta name="apple-mobile-web-app-title" content="Pugless">
 <!-- script(src=resources + "js/modernizr.min.js")--><!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
-<!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script><script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script><![endif]-->
 <body>
 <header role="banner">
   <div class="layout">
@@ -30,6 +28,92 @@
 <main>
   <div class="layout">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <form>
+      <p>
+        <label>Text<br>
+          <input>
+        </label>
+      </p>
+      <p>
+        <label>Disabled<br>
+          <input disabled>
+        </label>
+      </p>
+      <p>
+        <label>Textarea<br>
+          <textarea></textarea>
+        </label>
+      </p>
+      <p>
+        <label>Select<br>
+          <select>
+            <optgroup label="Something">
+              <option>This</option>
+              <option>That</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option>Now</option>
+              <option>Then</option>
+            </optgroup>
+          </select>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox">Checkbox
+        </label>
+      </p>
+      <fieldset>
+        <legend>Radio</legend>
+        <label>
+          <input type="radio" name="radio" value="1">This 
+        </label>
+        <label>
+          <input type="radio" name="radio" value="2">That 
+        </label>
+        <label>
+          <input type="radio" name="radio" value="3">Other 
+        </label>
+      </fieldset><br>
+      <p>
+        <label>Number<br>
+          <input type="number">
+        </label>
+      </p>
+      <p>
+        <label>Range<br>
+          <input type="range">
+        </label>
+      </p>
+      <p>
+        <label>File<br>
+          <input type="file">
+        </label>
+      </p>
+      <p>
+        <label>Colour<br>
+          <input type="color">
+        </label>
+      </p>
+      <p>
+        <label>Select Multiple<br>
+          <select multiple>
+            <optgroup label="Group">
+              <option>This</option>
+              <option>That</option>
+            </optgroup>
+            <optgroup label="Group">
+              <option>Now</option>
+              <option>Then</option>
+            </optgroup>
+          </select>
+        </label>
+      </p>
+      <p>
+        <button type="button">Done</button>
+        <button type="submit">Submit</button>
+      </p>
+    </form>
   </div>
 </main>
 <footer role="contentinfo">
