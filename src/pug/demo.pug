@@ -1,30 +1,39 @@
+h1 First Heading
+h2 Second Heading
+h3 Third Heading
+h4 Fourth Heading
+h5 Fifth Heading
+h6 Sixth Heading
+
 form
   p
     label
       | Text
       br
-      input
+      input(placeholder="Type Something…")
 
   p
     label
       | Disabled
       br
-      input(disabled)
+      input(disabled, placeholder="Nope")
 
   p
     label
       | Textarea
       br
-      textarea
+      textarea(placeholder="Lorem ipsum dolor sit amet…")
 
   p
     label
       | Select
       br
       select
+        option This
+        option That
         optgroup(label="Something")
-          option This
-          option That
+          option Here
+          option There
         optgroup(label="Other")
           option Now
           option Then
@@ -53,7 +62,7 @@ form
     label
       | Number
       br
-      input(type="number")
+      input(type="number", placeholder="0")
 
   p
     label
@@ -78,13 +87,17 @@ form
       | Select Multiple
       br
       select(multiple)
-        optgroup(label="Group")
-          option This
-          option That
-        optgroup(label="Group")
+        option This
+        option That
+        optgroup(label="Something")
+          option Here
+          option There
+        optgroup(label="Other")
           option Now
           option Then
 
   p
-    button(type="button") Done
-    button(type="submit") Submit
+    button(type="button") Nothing
+    button(type="submit" class="_primary") Submit
+    button(type="button" class="_good") Done
+    button(type="reset" class="_bad") Reset
