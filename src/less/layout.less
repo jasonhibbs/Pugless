@@ -47,7 +47,7 @@
 @max-xlarge-screen             : ~'screen and (max-width: @{xlarge-screen__max-width})';
 
 // Layout Sizes -----------------------------------------
-@handheld-portrait__layout     : percentage((280/320));
+@handheld-portrait__layout     : percentage((328/375));
 @handheld-landscape__layout    : unit((@fontsize_base * 30), px);
 @tablet-portrait__layout       : unit((@fontsize_base * 36), px);
 @tablet-landscape__layout      : unit((@fontsize_base * 45), px);
@@ -63,7 +63,6 @@
 
 
 // Classes --------------------------------------------------------
-
 .layout {
   width: @handheld-portrait__layout; // 300 / 320 = 93.75%
   position: relative;   // For nudging

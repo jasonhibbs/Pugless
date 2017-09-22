@@ -47,23 +47,41 @@ body {
 
 // Links -----------------------------------------------------------
 a {
+  .link-style(@linkcolor);
   text-decoration: none;
+}
+
+.link-style(@color, @hovercolor: darken(@color, 20)) {
+  @colorvisited  : @color;
+  @colorhover    : @hovercolor;
+  @colorfocus    : @hovercolor;
+  @coloractive   : @hovercolor;
+
+  color: @color;
   cursor: pointer;
-  color: @linkcolor;
   transition: @transition__basic;
 
   &:visited {
-    color: @linkcolorvisited;
+    color: @colorvisited;
   }
   &:hover {
-    color: @linkcolorhover;
+    color: @colorhover;
   }
   &:focus {
     outline: none;
-    color: @linkcolorfocus;
+    color: @colorfocus;
   }
   &:active {
-    color: @linkcoloractive;
+    color: @coloractive;
+  }
+
+  &._unlink {
+    color: inherit;
+
+    &:focus,
+    &:hover {
+      color: @color;
+    }
   }
 }
 

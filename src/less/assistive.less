@@ -1,24 +1,42 @@
 // Assistive //////////////////////////////////////////////////////
-@assistive_focus__shadow: 0 0 0 2px @keyfocuscolor;
+@assistive_focus__color: mix(@yellow, @orange, 66);
+@assistive_focus__shadow: 0 0 0 2px @assistive_focus__color;
 
-._focus_keys {
+.keyboard-focus-style(@inset: false) {
   outline: none;
-  box-shadow: inset @assistive_focus__shadow;
+  box-shadow: @assistive_focus__shadow;
+  transition: none;
 
-  input&,
-  input[type=checkbox]&:before,
-  input[type=radio]&:before,
-  select&,
-  textarea&,
-  button&,
-  [role=button]& {
-    box-shadow: @assistive_focus__shadow;
+  & when (@inset) {
+    box-shadow: inset @assistive_focus__shadow;
+  }
+}
+
+[data-whatinput=keyboard][data-whatintent=keyboard] {
+  :focus,
+  ._focus {
+    .keyboard-focus-style(true);
   }
 
-  input[type=range]& {
-    .input-range-thumb({
+  input,
+  select,
+  textarea,
+  button,
+  [role=button] {
+    &:focus {
       box-shadow: @assistive_focus__shadow;
-    });
+    }
+  }
+
+  input[type=checkbox],
+  input[type=radio] {
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus:before {
+      box-shadow: @assistive_focus__shadow;
+    }
   }
 }
 
@@ -36,16 +54,16 @@
   }
 }
 
-[aria-pressed=false]  .aria_pressed__true,
-[aria-pressed=true]   .aria_pressed__false,
-[aria-expanded=false] .aria_expanded__true,
-[aria-expanded=true]  .aria_expanded__false,
-[aria-checked=false]  .aria_checked__true,
-[aria-checked=true]   .aria_checked__false {
+[aria-pressed=false]  .aria-pressed__true,
+[aria-pressed=true]   .aria-pressed__false,
+[aria-expanded=false] .aria-expanded__true,
+[aria-expanded=true]  .aria-expanded__false,
+[aria-checked=false]  .aria-checked__true,
+[aria-checked=true]   .aria-checked__false {
   display: none;
 }
 
-.aria_sort__icon {
+.aria-sort__icon {
   &:before {
     .fa-icon();
     content: @fa-var-sort;

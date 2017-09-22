@@ -1,7 +1,8 @@
 // Controls ///////////////////////////////////////////////////////
 
 // Variables ------------------------------------------------------
-@control_line-height  : 1.875;
+@control_height       : 30;
+@control_line-height  : (@control_height/@fontsize_base);
 @control_radius       : 2px;
 
 @control_text         : @black;
@@ -26,7 +27,7 @@
 @input_border-width   : @control_border-width;
 @input_border-color   : @control_border-color;
 @input_focus          : @linkcolor;
-@input_invalid        : @errorcolor;
+@input_invalid        : @badcolor;
 @input_placeholder    : fadeout(@input_text, 66);
 @input_checkmark      : @input_text;
 @input_check_bg       : @input_background;
@@ -38,6 +39,11 @@ form {
   ul {
     .delist();
   }
+}
+
+fieldset {
+  border: 1px solid @lightgrey;
+  border-radius: @control_radius;
 }
 
 label {
@@ -93,6 +99,12 @@ textarea {
   min-height: 3.5em;
 }
 
+@-moz-document url-prefix() {
+  textarea {
+    padding-right: 0 !important;
+  }
+}
+
 ::placeholder {
   color: @input_placeholder;
 }
@@ -117,7 +129,7 @@ input[type=radio] {
   appearance: none;
   background: none;
   border: none;
-  margin-top: unit((3/16), em);
+  margin-top: unit((4/16), em);
 
   &,
   &:before {
@@ -218,7 +230,7 @@ input[type=range] {
 
   .input-range-track({
     outline: none;
-    border: inherit;
+    border: none;
     color: transparent;
     background: transparent;
   });
@@ -256,6 +268,34 @@ input[type=range] {
   &::-ms-fill-upper   { @rules(); }
 }
 
+@-moz-document url-prefix() {
+  input[type=range] {
+    height: unit(@control_line-height, em);
+  }
+}
+
+// File -----------------------------------------------------------
+input[type=file] {
+  max-width: 100%;
+  padding: (2em/@fontsize_base);
+  line-height: ((@control_height -  4) / @fontsize_base);
+
+  &::-webkit-file-upload-button {
+    .button-style();
+    .control-size(@fontsize_base, (@control_height - 4));
+    vertical-align: top;
+    margin-right: (@control_padding);
+
+    &,
+    &:focus,
+    &:hover {
+      color: @control_text;
+      background: @white;
+      box-shadow: none;
+    }
+  }
+}
+
 // Selects --------------------------------------------------------
 select {
   display: inline-block;
@@ -282,25 +322,29 @@ select {
 
   &[multiple] {
     height: auto;
-    padding: 0;
+    padding-right: @control_padding;
     background-image: none;
 
     option {
-      padding: 0.154em @control_padding;
-      padding-right: (@control_padding * 3);
+      padding: 0.154em (@control_padding / 2);
+      padding-right: (@control_padding * 2);
     }
 
     optgroup {
       padding-top: 0.154em;
       text-indent: @control_padding;
       font-weight: inherit;
+      font-style: inherit;
       line-height: inherit;
-      color: fadeout(@control_text, (100/3));
+      color: fadeout(@control_text, 33);
     }
 
     optgroup option {
-      // padding-left: 0;
-      // color: @control_text;
+      color: @control_text;
+
+      &:before {
+        content: "     ";
+      }
     }
   }
 }
@@ -315,7 +359,7 @@ select {
 
 @-moz-document url-prefix() {
   select {
-    .padding-y(4.5em/16);
+    .padding-y((4.5em/16));
 
     &:-moz-focusring {
       outline: none;
@@ -339,6 +383,18 @@ input[type=button] {
 
   .control-size();
   .button-style();
+
+  &._primary {
+    .button-color(@white, @basecolor);
+  }
+
+  &._good {
+    .button-color(@white, @goodcolor);
+  }
+
+  &._bad {
+    .button-color(@white, @badcolor);
+  }
 }
 
 .button() {
@@ -414,9 +470,9 @@ input[type=button] {
 }
 
 // Sizing -------------------------------------
-.control-size(@font-size: @fontsize_base, @line-height: @control_line-height) {
+.control-size(@font-size: @fontsize_base, @line-height: (@control_line-height * @fontsize_base)) {
   font-size: unit((@font-size / @fontsize_base), em);
-  line-height: @line-height;
+  line-height: (@line-height / @font-size);
 }
 
 .range-size(@lineheight: @control_line-height) {
@@ -424,6 +480,7 @@ input[type=button] {
     width:  calc(~"@{lineheight}em" - 4px);
     height: calc(~"@{lineheight}em" - 4px);
   }
+
   &::-webkit-slider-thumb {
     .size(@lineheight);
   }
@@ -437,26 +494,26 @@ input[type=button] {
 
 .control-small,
 .input-small,
-.button-small   { .control-size(13, (24/12)); }
+.button-small   { .control-size(13, 24); }
 
 .control-base,
 .input-base,
-.button-base    { .control-size(14, (30/14)); }
+.button-base    { .control-size(14, 30); }
 
 .control-large,
 .input-large,
-.button-large   { .control-size(16, (36/16)); }
+.button-large   { .control-size(16, 36); }
 
 .control-xlarge,
 .input-xlarge,
-.button-xlarge  { .control-size(18, (39/18)); }
+.button-xlarge  { .control-size(18, 39); }
 
 .control-xxlarge,
 .input-xxlarge,
-.button-xxlarge { .control-size(21, (45/21)); }
+.button-xxlarge { .control-size(21, 45); }
 
 // Colouring ----------------------------------
-.control-colour(@text-color: @input_text, @background-color: @input_background, @focus-color: @input_focus) {
+.control-color(@text-color: @input_text, @background-color: @input_background, @focus-color: @input_focus) {
   color: @text-color;
   background-color: @background-color;
 
@@ -486,10 +543,6 @@ input[type=button] {
   }
 }
 
-.button-primary {
-  .button-color(@white, @basecolor);
-}
-
 // Resets -------------------------------------
 .button-reset() {
   padding: 0;
@@ -503,18 +556,6 @@ input[type=button] {
   }
 }
 
-// Fixes ----------------------------------------------------------
-// FF(S) --------------------------------------
-@-moz-document url-prefix() {
-  textarea {
-    padding-right: 0 !important;
-  }
-
-  select {
-    text-indent: 1px;
-    text-overflow: '';
-  }
-}
 
 // Sprites --------------------------------------------------------
 @icon_arrow-down-dark: url(data:image/svg+xml;base64,PHN2ZyBkYXRhLW5hbWU9ImFycm93LWRvd24tYmxhY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDY0IDQwIj48ZyBvcGFjaXR5PSIwLjM1Ij48cGF0aCBkPSJNNjMuMzYsOC40N0wzMy40NywzOC4zNmEyLDIsMCwwLDEtMi45NSwwTDAuNjQsOC40N0EyLjIxLDIuMjEsMCwwLDEsMCw3LDIuMjEsMi4yMSwwLDAsMSwuNjQsNS41M0wzLjg1LDIuMzJhMi4wOSwyLjA5LDAsMCwxLDEuNDctLjY0LDIuMjEsMi4yMSwwLDAsMSwxLjQ3LjY0TDMyLDI3LjUyLDU3LjIsMi4zMmEyLDIsMCwwLDEsMi45NSwwbDMuMjEsMy4yMUEyLjIxLDIuMjEsMCwwLDEsNjQsNywyLjIxLDIuMjEsMCwwLDEsNjMuMzYsOC40N1oiIGZpbGw9IiMwMDAiLz48L2c+PC9zdmc+Cg==);

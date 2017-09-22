@@ -1,5 +1,9 @@
 // Typography /////////////////////////////////////////////////////
 
+// Fonts ----------------------------------------------------------
+// .font-face('Font Name', '@{fontspath}/font_folder/font_filename');
+// @import url('https://fonts.googleapis.com/css?family=FontName');
+
 // Variables ------------------------------------------------------
 @fontspath : '../fonts';
 
@@ -23,7 +27,6 @@
 
 @lineheight_base    : 24;
 @lineheight_body    : (@lineheight_base / @fontsize_base);
-@lineheight_heading : (52/40);
 @lineheight_em      : unit(@lineheight_body, em);
 @elh                : @lineheight_em;
 
@@ -64,35 +67,30 @@
   white-space: nowrap;
 }
 
-// Fonts ----------------------------------------------------------
-// .font-face('Font Name', '@{fontspath}/font_folder/font_filename');
-
 // Definitions ----------------------------------------------------
-
 h1, .h1 {
-  .heading-size(36);
+  .heading-size(36, 42);
 }
 h2, .h2 {
-  .heading-size(32);
+  .heading-size(32, 36);
 }
 h3, .h3 {
-  .heading-size(27);
+  .heading-size(27, 33);
 }
 h4, .h4 {
-  .heading-size(21);
+  .heading-size(21, 27);
 }
 h5, .h5 {
-  .heading-size(18);
+  .heading-size(18, 24);
 }
 h6, .h6 {
-  .heading-size(14);
-  text-transform: uppercase;
-  letter-spacing: (3em/100);
+  .heading-size(16, 24);
+  ._smallcaps-all();
 }
 
-.heading-size(@px_size, @px_margin: @lineheight_base) {
-  font-size: unit((@px_size / @fontsize_UA), em);
-  .margin-y( unit((@px_margin / @px_size), em) );
+.heading-size(@font-size, @line-height: @font-size, @leading: @lineheight_base) {
+  .typeset(@font-size, @line-height);
+  .margin-y( unit((@leading / @font-size), em) );
 }
 
 h1, .h1,
@@ -104,7 +102,6 @@ h6, .h6 {
   color: @headingcolor;
   font-family: @fontfamily_heading;
   font-weight: @fontweight_heading;
-  line-height: @lineheight_heading;
   text-rendering: optimizelegibility;
 
   .lighter &,
@@ -182,4 +179,30 @@ blockquote {
   border-left: 0.25em solid @decorcolor;
   margin-left: 0;
   padding-left: 1.25em;
+}
+
+
+// Typographic Features -------------------------------------------
+._lining-numerals {
+  -webkit-font-feature-settings: "lnum" 1;
+     -moz-font-feature-settings: "lnum" 1;
+      -ms-font-feature-settings: "lnum" 1;
+       -o-font-feature-settings: "lnum" 1;
+          font-feature-settings: "lnum" 1;
+}
+
+._smallcaps {
+  -webkit-font-feature-settings: "smcp" 1;
+     -moz-font-feature-settings: "smcp" 1;
+      -ms-font-feature-settings: "smcp" 1;
+       -o-font-feature-settings: "smcp" 1;
+          font-feature-settings: "smcp" 1;
+}
+
+._smallcaps-all {
+  -webkit-font-feature-settings: "smcp" 1, "c2sc" 1;
+     -moz-font-feature-settings: "smcp" 1, "c2sc" 1;
+      -ms-font-feature-settings: "smcp" 1, "c2sc" 1;
+       -o-font-feature-settings: "smcp" 1, "c2sc" 1;
+          font-feature-settings: "smcp" 1, "c2sc" 1;
 }
