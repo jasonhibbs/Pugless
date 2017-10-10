@@ -1,91 +1,28 @@
 // Tables  /////////////////////////////////////////////////////////
-// Variables ------------------------------------------------------
-@styletables       : false;
 
-@table_fontsize     : 0.875em;
-@table_padding-x    : (@elh / 4);
-@table_padding-y    : (@elh / 4);
-@table_headingweight: inherit;
-@table_background   : @white;
-@table_hover        : darken(@table_background, 6);
-@table_borderwidth  : 1px;
-@table_bordercolor  : @decorcolor;
+// Variables ------------------------------------------------------
+@table_fontsize      : 0.875em;
+@table_padding-x     : (@elh / 4);
+@table_padding-y     : (@elh / 4);
+@table_headingweight : inherit;
+@table_background    : @white;
+@table_hover         : darken(@table_background, 6);
+@table_border-width  : 1px;
+@table_border-color  : @decorcolor;
 
 // General --------------------------------------------------------
-table when (@styletables) {
-  .tabular();
-}
-
 table {
-  font-size: @table_fontsize;
   width: 100%;
-  white-space: nowrap;
+  text-align: left;
+  margin-bottom: @elh;
   border-collapse: collapse;
   border-spacing: 0;
 
-  th {
-    font-weight: @table_headingweight;
-  }
-}
-
-.tabular {
-  margin-bottom: @elh;
-  background-color: @table_background;
-
-  caption {
-    padding: 0 @table_padding-x;
-    margin-bottom: (@elh * 0.5);
-  }
-
-  th,
-  td {
-    border-top: @table_borderwidth solid @table_bordercolor;
-    padding: @table_padding-y @table_padding-x;
-    text-align: left;
-    line-height: inherit;
-    vertical-align: top;
-  }
+  .table-style();
+  .table-color();
 
   th {
     font-weight: @table_headingweight;
-  }
-
-  thead th {
-    vertical-align: bottom;
-    border-top: none;
-  }
-
-  tbody tr th:first-child {
-    border-right: @table_borderwidth solid @table_bordercolor;
-  }
-
-  colgroup + thead tr:first-child th,
-  colgroup + thead tr:first-child td,
-  thead:first-child tr:first-child th,
-  thead:first-child tr:first-child td {
-    border-top : 0;
-  }
-
-  tbody + tbody {
-    border-top: (@table_borderwidth * 2) solid @table_bordercolor;
-  }
-
-  tbody tr td,
-  tbody tr th {
-    transition: background-color 0.15s;
-  }
-
-  tbody tr:hover td,
-  tbody tr:hover th {
-    background-color: @table_hover;
-  }
-
-  thead tr:last-child th {
-    border-bottom: (@table_borderwidth * 2) solid @table_bordercolor;
-  }
-
-  tfoot tr:first-child th {
-    border-top-width: (@table_borderwidth * 2);
   }
 
   // Fold -----------------------------------------------
@@ -105,6 +42,8 @@ table {
   }
 }
 
+// Mixins /////////////////////////////////////////////////////////
+
 // Decoration ----------------------------------------------------
 .table-stripe(@color) {
   tbody tr:nth-child(odd) {
@@ -114,5 +53,85 @@ table {
   tbody tr:hover td,
   tbody tr:hover th {
     background-color: transparent;
+  }
+}
+
+// Styling --------------------------------------------------------
+.table-style(@font-size: @table_fontsize, @padding-x: @table_padding-x, @padding-y: @table_padding-y, @border-width: @table_border-width, @white-space: nowrap) {
+  font-size: @font-size;
+  white-space: @white-space;
+
+  caption {
+    padding: 0 @padding-x;
+    margin-bottom: (@elh * 0.5);
+  }
+
+  th,
+  td {
+    border-top: @border-width solid;
+    padding: @padding-y @padding-x;
+    text-align: left;
+    line-height: inherit;
+    vertical-align: top;
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-top: none;
+  }
+
+  tbody tr th:first-child {
+    border-right: @border-width solid;
+  }
+
+  colgroup + thead tr:first-child th,
+  colgroup + thead tr:first-child td,
+  thead:first-child tr:first-child th,
+  thead:first-child tr:first-child td {
+    border-top : 0;
+  }
+
+  tbody + tbody {
+    border-top: (@border-width * 2) solid;
+  }
+
+  tbody tr td,
+  tbody tr th {
+    transition: background-color 0.15s;
+  }
+
+  thead tr:last-child th {
+    border-bottom: (@border-width * 2) solid;
+  }
+
+  tfoot tr:first-child th {
+    border-top-width: (@border-width * 2);
+  }
+}
+
+// Colouring ------------------------------------------------------
+.table-color(@background-color: @table_background, @border-color: @table_border-color, @hover-color: @table_hover) {
+  background-color: @background-color;
+
+  th,
+  td {
+    border-top-color: @border-color;
+  }
+
+  tbody tr th:first-child {
+    border-right-color: @border-color;
+  }
+
+  tbody + tbody {
+    border-top-color: @border-color;
+  }
+
+  tbody tr:hover td,
+  tbody tr:hover th {
+    background-color: @hover-color;
+  }
+
+  thead tr:last-child th {
+    border-bottom-color: @border-color;
   }
 }
