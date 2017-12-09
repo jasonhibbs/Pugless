@@ -61,15 +61,16 @@
 
 .aria-sort__icon {
   &:before {
+    .far();
     .fa-icon();
     content: @fa-var-sort;
   }
 
   [aria-sort=ascending] &:before {
-    content: @fa-var-sort-asc;
+    content: @fa-var-sort-up;
   }
 
   [aria-sort=descending] &:before {
-    content: @fa-var-sort-desc;
+    content: @fa-var-sort-down;
   }
 }
