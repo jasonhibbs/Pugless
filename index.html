@@ -17,7 +17,7 @@
 <body>
 <header role="banner">
   <div class="layout">
-    <h1 class="site_title"><a href="index.html" title="The Homepage of Pugless">Pugless</a></h1>
+    <h1 class="site_title"><a class="_unlink" href="index.html" title="The Homepage of Pugless">Pugless</a></h1>
     <nav role="navigation">
       <h1 class="menu_control" aria-hidden="true" aria-expanded="true" aria-controls="primary_nav" tabindex="0"><span class="menu_text">Menu</span></h1>
       <ul id="primary_nav">
@@ -29,135 +29,160 @@
 </header>
 <main>
   <div class="layout">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    <h1>First Heading</h1>
-    <h2>Second Heading</h2>
-    <h3>Third Heading</h3>
-    <h4>Fourth Heading</h4>
-    <h5>Fifth Heading</h5>
-    <h6>Sixth Heading</h6>
-    <table>
-      <thead>
-        <tr>
-          <th>Year</th>
-          <th>Title</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1996</td>
-          <td>Tomb Raider</td>
-        </tr>
-        <tr>
-          <td>1997</td>
-          <td>Tomb Raider &#8545;</td>
-        </tr>
-        <tr>
-          <td>1998</td>
-          <td>Tomb Raider &#8546;</td>
-        </tr>
-        <tr>
-          <td>1999</td>
-          <td>Tomb Raider: The Last Revelation</td>
-        </tr>
-        <tr>
-          <td>2000</td>
-          <td>Tomb Raider: Chronicles</td>
-        </tr>
-      </tbody>
-    </table>
-    <form>
-      <p>
-        <label>Text<br>
-          <input placeholder="Type Something…">
-        </label>
-      </p>
-      <p>
-        <label>Disabled<br>
-          <input disabled placeholder="Nope">
-        </label>
-      </p>
-      <p>
-        <label>Textarea<br>
-          <textarea placeholder="Lorem ipsum dolor sit amet…"></textarea>
-        </label>
-      </p>
-      <p>
-        <label>Select<br>
-          <select>
-            <option>This</option>
-            <option>That</option>
-            <optgroup label="Something">
-              <option>Here</option>
-              <option>There</option>
-            </optgroup>
-            <optgroup label="Other">
-              <option>Now</option>
-              <option>Then</option>
-            </optgroup>
-          </select>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input type="checkbox">Checkbox
-        </label>
-      </p>
-      <fieldset>
-        <legend>Radio</legend>
-        <label>
-          <input type="radio" name="radio" value="1">This 
-        </label>
-        <label>
-          <input type="radio" name="radio" value="2">That 
-        </label>
-        <label>
-          <input type="radio" name="radio" value="3">Other 
-        </label>
-      </fieldset><br>
-      <p>
-        <label>Number<br>
-          <input type="number" placeholder="0">
-        </label>
-      </p>
-      <p>
-        <label>Range<br>
-          <input type="range">
-        </label>
-      </p>
-      <p>
-        <label>File<br>
-          <input type="file">
-        </label>
-      </p>
-      <p>
-        <label>Colour<br>
-          <input type="color">
-        </label>
-      </p>
-      <p>
-        <label>Select Multiple<br>
-          <select multiple>
-            <option>This</option>
-            <option>That</option>
-            <optgroup label="Something">
-              <option>Here</option>
-              <option>There</option>
-            </optgroup>
-            <optgroup label="Other">
-              <option>Now</option>
-              <option>Then</option>
-            </optgroup>
-          </select>
-        </label>
-      </p>
-      <p>
-        <button type="button">Nothing</button>
-        <button class="_primary" type="submit">Submit</button>
-        <button class="_good" type="button">Done</button>
-        <button class="_bad" type="reset">Reset</button>
-      </p>
-    </form>
+    <section>
+      <h2>Typography</h2>
+      <ol>
+        <li>
+          <p class="h1">First Heading</p>
+        </li>
+        <li>
+          <p class="h2">Second Heading</p>
+        </li>
+        <li>
+          <p class="h3">Third Heading</p>
+        </li>
+        <li>
+          <p class="h4">Fourth Heading</p>
+        </li>
+        <li>
+          <p class="h5">Fifth Heading</p>
+        </li>
+        <li>
+          <p class="h6">Sixth Heading</p>
+        </li>
+      </ol>
+      <p>Lorem ipsum dolor <a>sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+    <section>
+      <h2>Tables</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1996</td>
+            <td>Tomb Raider</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+            <td>Tomb Raider &#8545;</td>
+          </tr>
+          <tr>
+            <td>1998</td>
+            <td>Tomb Raider &#8546;</td>
+          </tr>
+          <tr>
+            <td>1999</td>
+            <td>Tomb Raider: The Last Revelation</td>
+          </tr>
+          <tr>
+            <td>2000</td>
+            <td>Tomb Raider: Chronicles</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Controls</h2>
+      <form>
+        <p>
+          <label>Text<br>
+            <input placeholder="Type Something…">
+          </label>
+        </p>
+        <p>
+          <label>Disabled<br>
+            <input disabled placeholder="Nope">
+          </label>
+        </p>
+        <p>
+          <label>Textarea<br>
+            <textarea placeholder="Lorem ipsum dolor sit amet…"></textarea>
+          </label>
+        </p>
+        <p>
+          <label>Select<br>
+            <select>
+              <option>This</option>
+              <option>That</option>
+              <optgroup label="Something">
+                <option>Here</option>
+                <option>There</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option>Now</option>
+                <option>Then</option>
+              </optgroup>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox">Checkbox
+          </label>
+        </p>
+        <p>
+          <fieldset>
+            <legend>Radio</legend>
+            <label>
+              <input type="radio" name="radio" value="1">This 
+            </label>
+            <label>
+              <input type="radio" name="radio" value="2">That 
+            </label>
+            <label>
+              <input type="radio" name="radio" value="3">Other 
+            </label>
+          </fieldset>
+        </p>
+        <p>
+          <label>Number<br>
+            <input type="number" placeholder="0">
+          </label>
+        </p>
+        <p>
+          <label>Range<br>
+            <input type="range">
+          </label>
+        </p>
+        <p>
+          <label>File<br>
+            <input type="file">
+          </label>
+        </p>
+        <p>
+          <label>Colour<br>
+            <input type="color" placeholder="#000000">
+          </label>
+        </p>
+        <p>
+          <label>Select Multiple<br>
+            <select multiple>
+              <option>This</option>
+              <option>That</option>
+              <optgroup label="Something">
+                <option>Here</option>
+                <option>There</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option>Now</option>
+                <option>Then</option>
+              </optgroup>
+            </select>
+          </label>
+        </p>
+        <p>
+          <button type="button">Nothing</button>
+          <button class="_primary" type="submit">Submit</button>
+          <button class="_good" type="button">Done</button>
+          <button class="_bad" type="reset">Reset</button>
+        </p>
+      </form>
+    </section>
   </div>
 </main>
 <footer role="contentinfo">

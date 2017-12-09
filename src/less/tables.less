@@ -2,8 +2,8 @@
 
 // Variables ------------------------------------------------------
 @table_fontsize      : 0.875em;
-@table_padding-x     : (@elh / 4);
-@table_padding-y     : (@elh / 4);
+@table_padding-x     : (@lh / 4);
+@table_padding-y     : (@lh / 4);
 @table_headingweight : inherit;
 @table_background    : @white;
 @table_hover         : darken(@table_background, 6);
@@ -14,7 +14,7 @@
 table {
   width: 100%;
   text-align: left;
-  margin-bottom: @elh;
+  margin-bottom: @lh;
   border-collapse: collapse;
   border-spacing: 0;
 
@@ -34,7 +34,7 @@ table {
     -webkit-overflow-scrolling: touch;
 
     border-right: 1px solid @lightgrey;
-    padding-bottom: (@elh * 0.875);
+    padding-bottom: (@lh * 0.875);
 
     caption {
       text-align: left;
@@ -63,7 +63,7 @@ table {
 
   caption {
     padding: 0 @padding-x;
-    margin-bottom: (@elh * 0.5);
+    margin-bottom: (@lh * 0.5);
   }
 
   th,

@@ -2,37 +2,41 @@
 
 // Variables ------------------------------------------------------
 @control_height       : 30;
-@control_line-height  : (@control_height/@fontsize_base);
+@control_line-height  : (@control_height / @fontsize_base);
 @control_radius       : 2px;
-
-@control_text         : @black;
-@control_background   : hsl(000, 000, 088%);
-@control_transition   : color 0.15s, background-color 0.15s, box-shadow 0.15s, opacity 0.15s;
-@control_padding      : (5em/9);
 @control_border-width : 0;
-@control_border-color : @control_background;
-@control-thumb_color  : @white;
+
+@control_color        : @black;
+@control_placeholder  : fadeout(@input_color, 66);
+@control_foreground   : @white;
+@control_background   : darken(@white, 12);
 @control_font-weight  : 400;
+@control_padding      : (5em/9);
+@control_border-color : transparent;
+@control_transition   : color 0.15s, background-color 0.15s, box-shadow 0.15s, opacity 0.15s;
 
-@button_text          : @control_text;
-@button_background    : @control_background;
-@button_border-width  : @control_border-width;
-@button_border-color  : @control_border-color;
-@button_focus         : darken(@button_background, 12);
-@button_active        : darken(@button_focus, 8);
-@button_padding       : (7em/9);
-
-@input_text           : @control_text;
+@input_color          : @control_color;
 @input_background     : @control_background;
-@input_border-width   : @control_border-width;
-@input_border-color   : @control_border-color;
 @input_focus          : @linkcolor;
 @input_invalid        : @badcolor;
-@input_placeholder    : fadeout(@input_text, 66);
-@input_checkmark      : @input_text;
-@input_check_bg       : @input_background;
-@input_radio_padding  : 5px;
+@input_border-width   : @control_border-width;
+@input_border-color   : @control_border-color;
 @input_padding        : @control_padding;
+
+@checkbox_check       : @input_color;
+@checkbox_background  : @input_background;
+
+@radio_check          : @input_color;
+@radio_background     : @input_background;
+@radio_padding        : 5px;
+
+@button_color         : @control_color;
+@button_background    : @control_background;
+@button_focus         : darken(@button_background, 12);
+@button_active        : darken(@button_focus, 8);
+@button_border-width  : @control_border-width;
+@button_border-color  : @control_border-color;
+@button_padding       : (7em/9);
 
 // General --------------------------------------------------------
 form {
@@ -53,7 +57,7 @@ label {
 button,
 select,
 input {
-  letter-spacing: 0.02em; // scope for smaller font sizes
+  letter-spacing: unit((20/1000), em);
 }
 
 button,
@@ -70,7 +74,6 @@ textarea {
   display: inline-block;
   .control-size();
   .control-style();
-  padding: 0 @control_padding;
   text-overflow: ellipsis;
 
   &:focus,
@@ -106,7 +109,7 @@ textarea {
 }
 
 ::placeholder {
-  color: @input_placeholder;
+  color: @control_placeholder;
 }
 
 ::-webkit-datetime-edit-fields-wrapper {
@@ -145,7 +148,7 @@ input[type=radio] {
 
   &:before {
     .control-style();
-    background: @input_check_bg;
+    padding: 0;
   }
 
   &:after {
@@ -181,8 +184,12 @@ input[type=checkbox] {
     opacity: 1;
   }
 
+  &:before {
+    background: @checkbox_background;
+  }
+
   &:after {
-    border: unit((2/16), em) solid @input_checkmark;
+    border: unit((2/16), em) solid @checkbox_check;
     border-top: none;
     border-right: none;
 
@@ -202,12 +209,16 @@ input[type=radio] {
     border-radius: 100%;
   }
 
+  &:before {
+    background: @radio_background;
+  }
+
   &:after {
-    background: @input_checkmark;
-    top:    @input_radio_padding;
-    right:  @input_radio_padding;
-    bottom: @input_radio_padding;
-    left:   @input_radio_padding;
+    background: @radio_check;
+    top:        @radio_padding;
+    right:      @radio_padding;
+    bottom:     @radio_padding;
+    left:       @radio_padding;
   }
 }
 
@@ -222,7 +233,7 @@ input[type=range] {
     appearance: none;
     border: none;
     border-radius: (@control_radius * 0.5);
-    background: @control-thumb_color;
+    background: @control_foreground;
     cursor: pointer;
     cursor: grab;
     transition: @control_transition;
@@ -280,20 +291,50 @@ input[type=file] {
   padding: 2px;
   line-height: ((@control_height -  4) / @fontsize_base);
 
-  &::-webkit-file-upload-button {
+  .input-file-button({
     .button-style();
-    .border-right-radius(0);
     .control-size(@fontsize_base, (@control_height - 4));
+    border-radius: (@control_radius / 2);
     vertical-align: top;
     margin-right: (@control_padding);
 
     &,
     &:focus,
     &:hover {
-      color: @control_text;
+      color: @control_color;
       background: @white;
       box-shadow: none;
     }
+  });
+
+  .input-file-button(@rules) {
+    &::-webkit-file-upload-button { @rules(); }
+  }
+}
+
+// Color ----------------------------------------------------------
+input[type=color] {
+  width: auto;
+  height: unit(@control_line-height, em);
+  padding: 2px @control_padding;
+
+  .input-color-swatch-wrapper({
+    padding: 0;
+  });
+
+  .input-color-swatch({
+    min-width: unit(((@control_height - 4) / @fontsize_base), em);
+    border: none;
+    border-radius: (@control_radius / 2);
+  });
+
+  .input-color-swatch-wrapper(@rules) {
+    &::-webkit-color-swatch-wrapper { @rules(); }
+  }
+
+  .input-color-swatch(@rules) {
+    &::-webkit-color-swatch { @rules(); }
+    &::-moz-color-swatch    { @rules(); }
   }
 }
 
@@ -302,7 +343,6 @@ select {
   display: inline-block;
   .control-size();
   .control-style();
-  padding: 0 @control_padding;
   padding-right: (@control_padding * 3);
   appearance: none;
   cursor: pointer;
@@ -310,10 +350,17 @@ select {
   background-repeat: no-repeat;
   background-position: right (@control_padding) center;
   background-size: (@control_padding * 1.25) auto;
-  .select_arrow__dark();
+
+  & when (luma(@input_background) > 44%) {
+    .select_arrow__dark();
+  }
+
+  & when (luma(@input_background) < 44%) {
+    .select_arrow__light();
+  }
 
   &:hover {
-    color: @input_text;
+    color: @input_color;
   }
 
   &:focus,
@@ -337,11 +384,11 @@ select {
       font-weight: inherit;
       font-style: inherit;
       line-height: inherit;
-      color: fadeout(@control_text, 33);
+      color: fadeout(@control_color, 33);
     }
 
     optgroup option {
-      color: @control_text;
+      color: @control_color;
 
       &:before {
         content: "     ";
@@ -360,7 +407,7 @@ select {
 
 @-moz-document url-prefix() {
   select {
-    .padding-y((4.5em/16));
+    .padding-y((4em/16));
 
     &:-moz-focusring {
       outline: none;
@@ -441,7 +488,7 @@ input[type=button] {
   &:visited,
   &:focus,
   &:hover {
-    color: @control_text;
+    color: @control_color;
   }
 
   &:focus,
@@ -456,13 +503,14 @@ input[type=button] {
 }
 
 .control-style() {
-  color: @input_text;
+  color: @input_color;
   background: @input_background;
+  font-weight: @control_font-weight;
+  padding: 0 @control_padding;
   border: @input_border-width solid @input_border-color;
   border-radius: @control_radius;
   vertical-align: middle;
   transition: @control_transition;
-  font-weight: @control_font-weight;
 }
 
 .control-focus-style() {
@@ -471,25 +519,25 @@ input[type=button] {
 }
 
 // Sizing -------------------------------------
-.control-size(@font-size: @fontsize_base, @line-height: (@control_line-height * @fontsize_base)) {
+.control-size(@font-size: @fontsize_base, @line-height: @control_height) {
   font-size: unit((@font-size / @fontsize_base), em);
   line-height: (@line-height / @font-size);
 }
 
-.range-size(@lineheight: @control_line-height) {
-  .size(@lineheight) {
-    width:  calc(~"@{lineheight}em" - 4px);
-    height: calc(~"@{lineheight}em" - 4px);
+.range-size(@line-height: (@control_height - 4), @font-size: @fontsize_base) {
+  .size(@line-height) {
+    width:  unit((@line-height / @font-size), em);
+    height: unit((@line-height / @font-size), em);
   }
 
   &::-webkit-slider-thumb {
-    .size(@lineheight);
+    .size(@line-height);
   }
   &::-moz-range-thumb {
-    .size(@lineheight);
+    .size(@line-height);
   }
   &::-ms-thumb {
-    .size(@lineheight);
+    .size(@line-height);
   }
 }
 
@@ -514,7 +562,7 @@ input[type=button] {
 .button-xxlarge { .control-size(21, 45); }
 
 // Colouring ----------------------------------
-.control-color(@text-color: @input_text, @background-color: @input_background, @focus-color: @input_focus) {
+.control-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
   color: @text-color;
   background-color: @background-color;
 
@@ -524,7 +572,7 @@ input[type=button] {
   }
 }
 
-.button-color(@text-color: @button_text, @background-color: @button_background) {
+.button-color(@text-color: @button_color, @background-color: @button_background) {
   background-color: @background-color;
 
   &,

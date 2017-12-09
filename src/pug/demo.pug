@@ -1,126 +1,142 @@
-h1 First Heading
-h2 Second Heading
-h3 Third Heading
-h4 Fourth Heading
-h5 Fifth Heading
-h6 Sixth Heading
+section
+  h2 Typography
 
-table
-  thead
-    tr
-      th Year
-      th Title
-  tbody
-    tr
-      td 1996
-      td Tomb Raider
-    tr
-      td 1997
-      td Tomb Raider &#8545;
-    tr
-      td 1998
-      td Tomb Raider &#8546;
-    tr
-      td 1999
-      td Tomb Raider: The Last Revelation
-    tr
-      td 2000
-      td Tomb Raider: Chronicles
+  ol
+    li
+      p.h1 First Heading
+    li
+      p.h2 Second Heading
+    li
+      p.h3 Third Heading
+    li
+      p.h4 Fourth Heading
+    li
+      p.h5 Fifth Heading
+    li
+      p.h6 Sixth Heading
+
+  p Lorem ipsum dolor <a>sit amet</a>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+section
+  h2 Tables
+
+  table
+    thead
+      tr
+        th Year
+        th Title
+    tbody
+      tr
+        td 1996
+        td Tomb Raider
+      tr
+        td 1997
+        td Tomb Raider &#8545;
+      tr
+        td 1998
+        td Tomb Raider &#8546;
+      tr
+        td 1999
+        td Tomb Raider: The Last Revelation
+      tr
+        td 2000
+        td Tomb Raider: Chronicles
+
+section
+  h2 Controls
+
+  form
+    p
+      label
+        | Text
+        br
+        input(placeholder="Type Something…")
+
+    p
+      label
+        | Disabled
+        br
+        input(disabled, placeholder="Nope")
+
+    p
+      label
+        | Textarea
+        br
+        textarea(placeholder="Lorem ipsum dolor sit amet…")
+
+    p
+      label
+        | Select
+        br
+        select
+          option This
+          option That
+          optgroup(label="Something")
+            option Here
+            option There
+          optgroup(label="Other")
+            option Now
+            option Then
+
+    p
+      label
+        input(type="checkbox")
+        | Checkbox
 
 
-form
-  p
-    label
-      | Text
-      br
-      input(placeholder="Type Something…")
+    p
+      fieldset
+        legend Radio
+        label
+          input(type="radio" name="radio" value="1")
+          | This 
+        label
+          input(type="radio" name="radio" value="2")
+          | That 
+        label
+          input(type="radio" name="radio" value="3")
+          | Other 
 
-  p
-    label
-      | Disabled
-      br
-      input(disabled, placeholder="Nope")
+    p
+      label
+        | Number
+        br
+        input(type="number", placeholder="0")
 
-  p
-    label
-      | Textarea
-      br
-      textarea(placeholder="Lorem ipsum dolor sit amet…")
+    p
+      label
+        | Range
+        br
+        input(type="range")
 
-  p
-    label
-      | Select
-      br
-      select
-        option This
-        option That
-        optgroup(label="Something")
-          option Here
-          option There
-        optgroup(label="Other")
-          option Now
-          option Then
+    p
+      label
+        | File
+        br
+        input(type="file")
 
-  p
-    label
-      input(type="checkbox")
-      | Checkbox
+    p
+      label
+        | Colour
+        br
+        input(type="color" placeholder="#000000")
 
+    p
+      label
+        | Select Multiple
+        br
+        select(multiple)
+          option This
+          option That
+          optgroup(label="Something")
+            option Here
+            option There
+          optgroup(label="Other")
+            option Now
+            option Then
 
-  fieldset
-    legend Radio
-    label
-      input(type="radio" name="radio" value="1")
-      | This 
-    label
-      input(type="radio" name="radio" value="2")
-      | That 
-    label
-      input(type="radio" name="radio" value="3")
-      | Other 
-
-  br
-
-  p
-    label
-      | Number
-      br
-      input(type="number", placeholder="0")
-
-  p
-    label
-      | Range
-      br
-      input(type="range")
-
-  p
-    label
-      | File
-      br
-      input(type="file")
-
-  p
-    label
-      | Colour
-      br
-      input(type="color")
-
-  p
-    label
-      | Select Multiple
-      br
-      select(multiple)
-        option This
-        option That
-        optgroup(label="Something")
-          option Here
-          option There
-        optgroup(label="Other")
-          option Now
-          option Then
-
-  p
-    button(type="button") Nothing
-    button(type="submit" class="_primary") Submit
-    button(type="button" class="_good") Done
-    button(type="reset" class="_bad") Reset
+    p
+      button(type="button") Nothing
+      button(type="submit" class="_primary") Submit
+      button(type="button" class="_good") Done
+      button(type="reset" class="_bad") Reset

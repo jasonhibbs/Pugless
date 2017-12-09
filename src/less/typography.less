@@ -7,47 +7,40 @@
 // Variables ------------------------------------------------------
 @fontspath : '../fonts';
 
-@fontfamily_base    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-@fontfamily_body    : @fontfamily_base;
-@fontfamily_heading : @fontfamily_body;
-@fontfamily_alt     : @fontfamily_base;
-@fontfamily_mono    : "Panic Sans", Consolas, "Liberation Mono", Menlo, "Lucida Console", Courier, monospace;
-@fontfamily_icon    : FontAwesome;
+@fontfamily_base     : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+@fontfamily_mono     : "Panic Sans", Consolas, "Liberation Mono", Menlo, "Lucida Console", Courier, monospace;
+@fontfamily_icon     : FontAwesome;
 
-@fontsize_UA        : 16;
-@fontsize_base      : 16;
-@fontsize_medium    : 18;
-@fontsize_large     : 20;
-@fontsize_xlarge    : 21;
+@fontfamily_body     : @fontfamily_base;
+@fontfamily_heading  : inherit;
+@fontfamily_controls : inherit;
 
-@_fontsize_base   : percentage(((@fontsize_base   / @fontsize_UA) * (10 / @fontsize_UA)));
-@_fontsize_medium : percentage(((@fontsize_medium / @fontsize_UA) * (10 / @fontsize_UA)));
-@_fontsize_large  : percentage(((@fontsize_large  / @fontsize_UA) * (10 / @fontsize_UA)));
-@_fontsize_xlarge : percentage(((@fontsize_xlarge / @fontsize_UA) * (10 / @fontsize_UA)));
+@fontsize_UA         : 16;
+@fontsize_base       : 16;
+@fontsize_medium     : 18;
+@fontsize_large      : 20;
+@fontsize_xlarge     : 21;
 
-@lineheight_base    : 24;
-@lineheight_body    : (@lineheight_base / @fontsize_base);
-@lineheight_em      : unit(@lineheight_body, em);
-@elh                : @lineheight_em;
+@lineheight_base     : 24;
+@lineheight_body     : (@lineheight_base / @fontsize_base);
+@lineheight_em       : unit(@lineheight_body, em);
+@lh                  : @lineheight_em;
 
-@fontweight_base    : 400;
-@fontweight_bold    : (@fontweight_base + 100);
-@fontweight_heading : (@fontweight_base + 100);
+@fontweight_base     : 400;
+@fontweight_bold     : (@fontweight_base + 100);
+@fontweight_heading  : (@fontweight_base + 100);
 
-@li_padding         : (40em/@fontsize_base); // UA default is 40px
+@measure             : 40em;
+
+@list_padding        : (@lh * 2);
 
 // Mixins ---------------------------------------------------------
-.font-size(@pt_size: @fontsize_base) {
-  font-size: unit(@pt_size, px);
-  font-size: unit((@pt_size / 10), rem);
-}
-
 .typeset(@font-size: @fontsize_base, @line-height: @lineheight_base) {
   font-size: unit((@font-size / @fontsize_base), em);  // e.g. 18 / 16 = 1.125em
   line-height: (@line-height / @font-size); // e.g. 27 / 18 = 1.5
 }
 
-.font-face( @family-name, @path, @font-weight: normal, @font-style: normal) {
+.font-face(@family-name, @path, @font-weight: normal, @font-style: normal) {
   @font-face {
     font-family: @family-name;
     src: url('@{path}.eot');
@@ -123,7 +116,7 @@ address,
 blockquote {
   font-size: inherit;
   line-height: inherit;
-  margin: 0 auto @elh;
+  margin: 0 auto @lh;
 
   .lighter &,
   &.lighter {
@@ -163,7 +156,8 @@ small {
 
 ul,
 ol {
-  margin: 0 auto @elh;
+  margin: 0 auto @lh;
+  padding-left: @list_padding;
 }
 
 li a {

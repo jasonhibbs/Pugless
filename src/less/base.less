@@ -8,21 +8,22 @@
 html {
   box-sizing: border-box;
   height: 100%;
-  font-size: @_fontsize_base;
   color: @textcolor;
   background: @htmlcolor;
 
   -webkit-tap-highlight-color: @highlightcolor;
   -webkit-font-smoothing: antialiased;
 
+  font-size: unit((@fontsize_base / @fontsize_UA), em);
+
   @media @medium-screen {
-    font-size: @_fontsize_medium; // 16 * 1.125 = 18
+    font-size: unit((@fontsize_medium / @fontsize_UA), em);
   }
   @media @large-screen {
-    font-size: @_fontsize_large; // 16 * 1.25 = 20
+    font-size: unit((@fontsize_large  / @fontsize_UA), em);
   }
   @media @xlarge-screen {
-    font-size: @_fontsize_xlarge; // 16 * 1.5 = 20
+    font-size: unit((@fontsize_xlarge / @fontsize_UA), em);
   }
 }
 
@@ -36,7 +37,6 @@ body {
   overflow-y: auto;
   background: @bodycolor;
 
-  .font-size(@fontsize_base);
   line-height: (@lineheight_base / @fontsize_base);
   font-weight: @fontweight_base;
   font-family: @fontfamily_body;
