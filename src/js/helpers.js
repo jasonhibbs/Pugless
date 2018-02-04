@@ -30,5 +30,5 @@ function throttle (callback, limit) {
         wait = false;
       }, limit);
     }
-  }
+  };
 }
