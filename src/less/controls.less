@@ -428,15 +428,15 @@ input[type=button] {
   .button-style();
 
   &._primary {
-    .button-color(@white, @basecolor);
+    .button-color(@basecolor);
   }
 
   &._good {
-    .button-color(@white, @goodcolor);
+    .button-color(@goodcolor);
   }
 
   &._bad {
-    .button-color(@white, @badcolor);
+    .button-color(@badcolor);
   }
 }
 
@@ -568,7 +568,7 @@ input[type=button] {
 .button-xxlarge { .control-size(21, 45); }
 
 // Colouring ----------------------------------
-.button-color(@text-color: @button_color, @background-color: @button_background) {
+.button-color(@background-color: @button_background, @text-color: contrast(@background-color)) {
   background-color: @background-color;
 
   &,
@@ -588,7 +588,7 @@ input[type=button] {
   }
 }
 
-.control-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
+.control-color(@background-color: @input_background, @text-color: contrast(@background-color), @focus-color: @input_focus) {
   color: @text-color;
   background-color: @background-color;
 
@@ -598,7 +598,7 @@ input[type=button] {
   }
 }
 
-.select-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
+.select-color(@background-color: @input_background, @text-color: contrast(@background-color), @focus-color: @input_focus) {
   .control-color(@text-color, @background-color, @focus-color);
   .select-arrow(@background-color);
 }
