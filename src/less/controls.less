@@ -580,17 +580,22 @@ input[type=button] {
 
   &:focus,
   &:hover {
-    background-color: darken(@background-color, 12);
+    background-color: mix(contrast(@background-color), @background-color, 12);
   }
 
   &:active {
-    background-color: darken(@background-color, 20);
+    background-color: mix(contrast(@background-color), @background-color, 20);
   }
 }
 
 .control-color(@background-color: @input_background, @text-color: contrast(@background-color), @focus-color: @input_focus) {
   color: @text-color;
   background-color: @background-color;
+
+  &::placeholder {
+    color: fadeout(@text-color, 66);
+  }
+
 
   &:focus,
   &:hover {
