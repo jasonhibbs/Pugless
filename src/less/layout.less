@@ -6,6 +6,7 @@
 
 // Typical Device Sizes ---------------------------------
 @handheld-portrait__min-width  : 320px; // 20em;
+@handheld-plus__min-width      : 408px; // 25.5em;
 @handheld-landscape__min-width : 560px; // 35em;
 @tablet-portrait__min-width    : 768px; // 48em;
 @tablet-landscape__min-width   : 1024px; // 64em;
@@ -27,6 +28,7 @@
 
 // Media Queries ----------------------------------------
 @handheld                      : ~'screen and (min-width: @{handheld-portrait__min-width})';
+@handheld-plus                 : ~'screen and (min-width: @{handheld-plus__min-width})';
 @handheld-landscape            : ~'screen and (min-width: @{handheld-landscape__min-width})';
 @tablet                        : ~'screen and (min-width: @{tablet-portrait__min-width})';
 @tablet-landscape              : ~'screen and (min-width: @{tablet-landscape__min-width})';
