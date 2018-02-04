@@ -342,22 +342,7 @@ input[type=color] {
 select {
   display: inline-block;
   .control-size();
-  .control-style();
-  padding-right: (@control_padding * 3);
-  appearance: none;
-  cursor: pointer;
-
-  background-repeat: no-repeat;
-  background-position: right (@control_padding) center;
-  background-size: (@control_padding * 1.25) auto;
-
-  & when (luma(@input_background) > 44%) {
-    .select_arrow__dark();
-  }
-
-  & when (luma(@input_background) < 44%) {
-    .select_arrow__light();
-  }
+  .select-style();
 
   &:hover {
     color: @input_color;
@@ -394,6 +379,16 @@ select {
         content: "     ";
       }
     }
+  }
+}
+
+.select-arrow(@target) {
+  & when (luma(@target) < 18.73%) {
+    .select_arrow__light();
+  }
+
+  & when (luma(@target) >= 18.73%) {
+    .select_arrow__dark();
   }
 }
 
@@ -518,6 +513,17 @@ input[type=button] {
   box-shadow: 0 0 0 1px @input_focus;
 }
 
+.select-style() {
+  .control-style();
+  appearance: none;
+  cursor: pointer;
+  padding-right: (@control_padding * 3);
+  background-repeat: no-repeat;
+  background-position: right (@control_padding) center;
+  background-size: (@control_padding * 1.25) auto;
+  .select-arrow(@input_background);
+}
+
 // Sizing -------------------------------------
 .control-size(@font-size: @fontsize_base, @line-height: @control_height) {
   font-size: unit((@font-size / @fontsize_base), em);
@@ -562,16 +568,6 @@ input[type=button] {
 .button-xxlarge { .control-size(21, 45); }
 
 // Colouring ----------------------------------
-.control-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
-  color: @text-color;
-  background-color: @background-color;
-
-  &:focus,
-  &:hover {
-    box-shadow: 0 0 0 1px @focus-color;
-  }
-}
-
 .button-color(@text-color: @button_color, @background-color: @button_background) {
   background-color: @background-color;
 
@@ -590,6 +586,21 @@ input[type=button] {
   &:active {
     background-color: darken(@background-color, 20);
   }
+}
+
+.control-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
+  color: @text-color;
+  background-color: @background-color;
+
+  &:focus,
+  &:hover {
+    box-shadow: 0 0 0 1px @focus-color;
+  }
+}
+
+.select-color(@text-color: @input_color, @background-color: @input_background, @focus-color: @input_focus) {
+  .control-color(@text-color, @background-color, @focus-color);
+  .select-arrow(@background-color);
 }
 
 // Resets -------------------------------------
