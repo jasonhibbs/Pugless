@@ -101,7 +101,8 @@ function initARIATablists(el) {
   });
 }
 
-function initARIAExpanders(el) {
+function initARIAExpanders(el, aria) {
+  var hidden = (aria) ? 'aria-hidden' : 'hidden';
   $(el || '[aria-expanded][aria-controls]').each(function() {
     var $control = $(this),
         controls_id = $control.attr('aria-controls'),
@@ -112,11 +113,11 @@ function initARIAExpanders(el) {
 
     function setState(state) {
       if (state === 'true') {
-        $display.removeAttr('aria-hidden');
+        $display.removeAttr(hidden);
         $control.attr('aria-expanded', true);
         $other_controls.attr('aria-expanded', true);
       } else {
-        $display.attr('aria-hidden', true);
+        $display.attr(hidden, true);
         $control.attr('aria-expanded', false);
         $other_controls.attr('aria-expanded', false);
       }
