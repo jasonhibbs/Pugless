@@ -108,7 +108,6 @@ section
         | Range
         br
         input(type="range")
-
     p
       label
         | File
@@ -140,3 +139,18 @@ section
       button(type="submit" class="_primary") Submit
       button(type="button" class="_good") Done
       button(type="reset" class="_bad") Reset
+
+    p
+      label
+        | Progress
+        br
+        progress(max="100" value="66.66")
+        br
+        progress(max="100")
+
+    p
+      label
+        | Meter
+        br
+        meter(value="0.6" low="0.3" optimum="0.5" high="0.8")
+        meter(value="0.3" low="0.4" optimum="0.8" high="0.5")

@@ -32,6 +32,18 @@ figure {
   }
 }
 
+audio,
+canvas,
+video {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+video {
+  background-color: fadeout(#000, 10%);
+}
+
+// Summary & Details ----------------------------------------------
 summary {
   cursor: pointer;
 
@@ -42,13 +54,81 @@ summary {
 
 details {}
 
-audio,
-canvas,
-video {
-  vertical-align: middle;
-  max-width: 100%;
+// Progress & Meter -----------------------------------------------
+@progress_value_transition: width 0.2s, background-color 0.2s;
+
+progress,
+meter {
+  // appearance: none;
+  border: none;
+  border-radius: @control_radius;
+  overflow: hidden;
 }
 
-video {
-  background-color: fadeout(#000, 10%);
+progress {
+  .progress-bar({
+    background: @control_background;
+  });
+
+  .progress-value({
+    background: @basecolor;
+    transition: @progress_value_transition;
+  });
+
+  &:not([value]) {
+    .progress-value({
+      visibility: hidden;
+    });
+  }
+}
+
+.progress-bar(@rules) {
+  & { @rules(); }
+  &::-webkit-progress-bar { @rules(); }
+}
+
+.progress-value(@rules) {
+  &::-webkit-progress-value { @rules(); }
+  &::-moz-progress-bar      { @rules(); }
+}
+
+meter {
+  .meter-bar({
+    background: @control_background;
+  });
+
+  .meter-optimum-value({
+    background: @goodcolor;
+    transition: @progress_value_transition;
+  });
+
+  .meter-suboptimum-value({
+    background: @alertcolor;
+    transition: @progress_value_transition;
+  });
+
+  .meter-even-less-good-value({
+    background: @badcolor;
+    transition: @progress_value_transition;
+  });
+}
+
+.meter-bar(@rules) {
+  & { @rules(); }
+  &::-webkit-meter-bar { @rules(); }
+}
+
+.meter-optimum-value(@rules) {
+  &::-webkit-meter-optimum-value       { @rules(); }
+  &:-moz-meter-optimum::-moz-meter-bar { @rules(); }
+}
+
+.meter-suboptimum-value(@rules) {
+  &::-webkit-meter-suboptimum-value        { @rules(); }
+  &:-moz-meter-sub-optimum::-moz-meter-bar { @rules(); }
+}
+
+.meter-even-less-good-value(@rules) {
+  &::-webkit-meter-even-less-good-value        { @rules(); }
+  &:-moz-meter-sub-sub-optimum::-moz-meter-bar { @rules(); }
 }
