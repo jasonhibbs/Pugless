@@ -177,12 +177,22 @@ blockquote {
 
 
 // Typographic Features -------------------------------------------
+._tabular-numerals {
+  -webkit-font-feature-settings: "tnum" 1;
+     -moz-font-feature-settings: "tnum" 1;
+      -ms-font-feature-settings: "tnum" 1;
+       -o-font-feature-settings: "tnum" 1;
+          font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
 ._lining-numerals {
   -webkit-font-feature-settings: "lnum" 1;
      -moz-font-feature-settings: "lnum" 1;
       -ms-font-feature-settings: "lnum" 1;
        -o-font-feature-settings: "lnum" 1;
           font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
 }
 
 ._smallcaps {
